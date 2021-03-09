@@ -1,0 +1,6 @@
+framework module Pods_QBar_QBarUITests {
+  umbrella header "Pods-QBar-QBarUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
