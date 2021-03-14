@@ -168,7 +168,7 @@ class SettingsViewController: UIViewController {
         }
     }
     
-    private func restorePurchase() { // Will be added soon
+    private func restorePurchase() {
         displayAnimatedActivityIndicatorView()
         DispatchQueue.global(qos: .userInitiated).async {
             self.store.restorePurchases { (succes, productID) in
@@ -184,8 +184,7 @@ class SettingsViewController: UIViewController {
     }
     
     private func contactUs() {
-        let alert = UIAlertController(title: nil, message: "Do you want to contact us?", preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Contact via Email", style: UIAlertAction.Style.default, handler:{ (UIAlertAction)in
+        self.alert(title: nil, message: "Do you want to contact us?", preferredStyle: .actionSheet, cancelTitle: "Cancel", cancelHandler: nil, actionTitle: "Contact via Email") {
             if MFMailComposeViewController.canSendMail() {
                 let mail = MFMailComposeViewController()
                 mail.mailComposeDelegate = self
@@ -196,9 +195,18 @@ class SettingsViewController: UIViewController {
             } else {
                 openURL(path: "mailto:\(kEmail)")
             }
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    private func shareApp() {
+        guard let url = URL(string: kAppURL) else { return }
+        let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        activityVC.excludedActivityTypes = [.print]
+        activityVC.completionWithItemsHandler = { _, completed, _, _ in
+            if completed {
+            }
+        }
+        self.present(activityVC, animated: true, completion: nil)
     }
     
     // MARK: - OBJC Functions
@@ -246,6 +254,8 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             openURL(path: kPolicyURL)
         case 3:
             openURL(path: kTermsURL)
+        case 4:
+            shareApp()
         default:
             break
         }

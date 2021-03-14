@@ -51,7 +51,6 @@ class OnboardingViewController: UIViewController {
     deinit {
         NotificationCenter.default.removeObserver(self, name: dismissNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: subTypeNotificationIndex, object: nil)
-        NotificationCenter.default.removeObserver(self, name: restoreNotification, object: nil)
     }
     
     // MARK: - Functions
@@ -72,15 +71,6 @@ class OnboardingViewController: UIViewController {
     
     func setupScrollViewDidScroll(scrollView: UIScrollView, pageIndex: CGFloat) {
         snakePageControl.progress = pageIndex
-        
-        if Int(pageIndex) == slides.count - 1 {
-            nextButton.setImage(nil, for: .normal)
-            nextButton.setTitle("Subscribe", for: .normal)
-        } else {
-            nextButton.setImage(UIImage(named: "arrowRight"), for: .normal)
-            nextButton.setTitle(nil, for: .normal)
-        }
-        
         
         let maximumHorizontalOffset: CGFloat = scrollView.contentSize.width - scrollView.frame.width
         let currentHorizontalOffset: CGFloat = scrollView.contentOffset.x
@@ -104,10 +94,24 @@ class OnboardingViewController: UIViewController {
          */
         let percentOffset: CGPoint = CGPoint(x: percentageHorizontalOffset, y: percentageVerticalOffset)
         
+        
+        
         if(percentOffset.x > 0 && percentOffset.x <= 0.25) {
             snakePageControl.previousTint = .mainGray
         } else if(percentOffset.x > 0.25 && percentOffset.x <= 0.50) {
             snakePageControl.previousTint = .black
+        }
+        
+        if percentOffset.x > 0.7 {
+            snakePageControl.isHidden = true
+            nextButton.isHidden = true
+            nextButton.isEnabled = false
+        } else {
+            nextButton.isHidden = false
+            nextButton.isEnabled = true
+            snakePageControl.isHidden = false
+            nextButton.setImage(UIImage(named: "arrowRight"), for: .normal)
+            nextButton.setTitle(nil, for: .normal)
         }
     }
     
@@ -115,7 +119,6 @@ class OnboardingViewController: UIViewController {
     private func configureView() {
         NotificationCenter.default.addObserver(self, selector: #selector(notifiedToDismiss), name: dismissNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(notifiedForProductIndex(notification:)), name: subTypeNotificationIndex, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(notifiedToRestore), name: restoreNotification, object: nil)
         
         slides = Slide.slides
         
@@ -123,21 +126,21 @@ class OnboardingViewController: UIViewController {
         
         setupSlideScrollView(slides: slides)
         
-        service.getOnboardingTitles(for: PremiumTab.Onboarding.rawValue) { (onboarding, error) in
+        service.getSubscribeTitles(for: PremiumTab.Subscribe.rawValue) { (subscribe, error) in
             if let error = error {
                 ErrorHandling.showError(message: error.localizedDescription, controller: self)
                 if let slide = self.slides.last {
                     DispatchQueue.main.async {
-                        self.configureSlideLabels(slide: slide, onboarding: OnboardingTitle())
+                        self.configureSlideLabels(slide: slide, subscribe: SubscribeTitle())
                     }
                 }
                 return
             }
-            if let onboarding = onboarding {
+            if let subscribe = subscribe {
                 if let slide = self.slides.last {
                     DispatchQueue.main.async { [weak self] in
                         guard let self = self else { return }
-                        self.configureSlideLabels(slide: slide, onboarding: onboarding)
+                        self.configureSlideLabels(slide: slide, subscribe: subscribe)
                     }
                 }
             }
@@ -154,25 +157,16 @@ class OnboardingViewController: UIViewController {
         view.bringSubviewToFront(snakePageControl)
     }
     
-    private func configureSlideLabels(slide: Slide, onboarding: OnboardingTitle) {
-        slide.premiumLabel.text = onboarding.firstTitle
-        slide.enjoyLabel.text = onboarding.secondTitle
-        slide.annualLabel1.text = onboarding.annualFirstTitle
-        slide.annualLabel2.text = onboarding.annualSecondTitle
-        slide.monthlyLabel1.text = onboarding.monthlyFirstTitle
-        slide.monthlyLabel2.text = onboarding.monthlySecondTitle
-        slide.weeklyLabel1.text = onboarding.weeklyFirstTitle
-        slide.weeklyLabel2.text = onboarding.weeklySecondTitle
-    }
-    
-    private func subscribeTapped() {
-        if snakePageControl.currentPage == 2 {
-            guard !products.isEmpty else {
-                print("Cannot purchase subscription because products is empty!")
-                return
-            }
-            self.purchaseItem(index: productIndex)
-        }
+    private func configureSlideLabels(slide: Slide, subscribe: SubscribeTitle) {
+        slide.premiumLabel.text = subscribe.firstTitle
+        slide.enjoyLabel.text = subscribe.secondTitle
+        slide.startFreeLabel.text = subscribe.thirdTitle
+        slide.thenLabel.text = subscribe.fourthTitle
+        slide.proceedWithBasicButton.setTitle(subscribe.basicTitle, for: UIControl.State())
+        slide.tryFreeButton.setTitle(subscribe.tryFreeTitle, for: UIControl.State())
+        slide.startMonthlyButton.setTitle(subscribe.startMonthlyFirstTitle, for: UIControl.State())
+        slide.startMonthlySecondButton.setTitle(subscribe.startMonthlySecondTitle, for: UIControl.State())
+        slide.privacyEulaLabel.text = subscribe.privacyEulaTitle
     }
     
     private func purchaseItem(index: Int) {
@@ -203,21 +197,16 @@ class OnboardingViewController: UIViewController {
     @objc private func notifiedForProductIndex(notification: Notification) {
         if let index = notification.userInfo?["index"] as? Int {
             self.productIndex = index
-        }
-    }
-    
-    @objc private func notifiedToRestore() {
-        displayAnimatedActivityIndicatorView()
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.store.restorePurchases { (succes, productID) in
-                DispatchQueue.main.async {
-                    guard succes else { return }
-                    self.hideAnimatedActivityIndicatorView()
-                    self.dismiss(animated: true, completion: nil)
+            if snakePageControl.currentPage == 2 {
+                guard !products.isEmpty else {
+                    print("Cannot purchase subscription because products is empty!")
+                    return
                 }
+                self.purchaseItem(index: productIndex)
             }
         }
     }
+    
     
     // MARK: - IBActions
     @IBAction func nextTapped(_ sender: Any) {
@@ -225,7 +214,6 @@ class OnboardingViewController: UIViewController {
         frame.origin.x = frame.size.width * CGFloat((snakePageControl.currentPage + 1))
         frame.origin.y = 0
         scrollView.scrollRectToVisible(frame, animated: true)
-        subscribeTapped()
     }
 }
 

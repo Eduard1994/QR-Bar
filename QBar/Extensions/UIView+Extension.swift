@@ -140,11 +140,15 @@ fileprivate let activityIndicatorViewTag: Int = 1000
 // Public interface
 extension UIView {
     func displayAnimatedActivityIndicatorView() {
-        setActivityIndicatorView()
+        DispatchQueue.main.async {
+            self.setActivityIndicatorView()
+        }
     }
 
     func hideAnimatedActivityIndicatorView() {
-        removeActivityIndicatorView()
+        DispatchQueue.main.async {
+            self.removeActivityIndicatorView()
+        }
     }
 }
 

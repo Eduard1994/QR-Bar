@@ -44,6 +44,8 @@ class MainSegmentedViewController: UIViewController {
     var products: [SKProduct] = []
     var store: IAPManager!
     
+    var cancelled = false
+    
     lazy var code: Code = {
         let code = Code()
         return code
@@ -210,12 +212,20 @@ class MainSegmentedViewController: UIViewController {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             controller.reset(animated: true)
-            self.service.addNewCode(code: self.code, at: self.code.tab) { [weak self](childUpdates, error) in
-                guard let self = self else { return }
-                if let error = error {
-                    ErrorHandling.showError(message: error.localizedDescription, controller: self)
-                    return
+            if !self.cancelled {
+                self.service.addNewCode(code: self.code, at: self.code.tab) { [weak self](childUpdates, error) in
+                    guard let self = self else { return }
+                    DispatchQueue.main.after(0.5) {
+                        self.segmentedControl.setIndex(0)
+                        self.updateView()
+                    }
+                    if let error = error {
+                        ErrorHandling.showError(message: error.localizedDescription, controller: self)
+                        return
+                    }
                 }
+            } else {
+                self.cancelled = false
             }
         }
     }
@@ -249,6 +259,9 @@ extension MainSegmentedViewController: QRBarcodeScannerCodeDelegate {
 extension MainSegmentedViewController: QRBarcodeScannerErrorDelegate {
     func scanner(_ controller: QRBarcodeScannerViewController, didReceiveError error: Error) {
         print(error.localizedDescription)
+        DispatchQueue.main.after(2) {
+            controller.resetWithError(message: error.localizedDescription)
+        }
     }
 }
 
@@ -256,6 +269,11 @@ extension MainSegmentedViewController: QRBarcodeScannerErrorDelegate {
 extension MainSegmentedViewController: QRBarcodeScannerDismissalDelegate {
     func scannerDidDismiss(_ controller: QRBarcodeScannerViewController) {
         controller.reset(animated: true)
+        cancelled = true
+        DispatchQueue.main.after(0.5) {
+            self.segmentedControl.setIndex(0)
+            self.updateView()
+        }
     }
 }
 

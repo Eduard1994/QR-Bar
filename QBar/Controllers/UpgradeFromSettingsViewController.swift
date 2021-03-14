@@ -24,6 +24,7 @@ class UpgradeFromSettingsViewController: UIViewController {
     @IBOutlet weak var weeklyLabel2: UILabel!
     
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
     
     // MARK: - Properties
     let service = Service()
@@ -42,6 +43,16 @@ class UpgradeFromSettingsViewController: UIViewController {
         imageView.cornerRadius(to: 24)
         upgradeView.cornerRadius(to: 16)
         upgradeButton.cornerRadius(to: 20)
+        
+        if screenHeight == 780 {
+            imageHeightConstraint.constant = 530
+        } else if screenHeight >= 812 {
+            imageHeightConstraint.constant = 580
+        } else if screenHeight >= 844 {
+            imageHeightConstraint.constant = 600
+        } else {
+            imageHeightConstraint.constant = 480
+        }
         
         print(products)
         

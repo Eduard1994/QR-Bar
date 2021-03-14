@@ -120,14 +120,14 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upgrade" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="upd-W4-0I8">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get Full Access" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="upd-W4-0I8">
                                 <rect key="frame" x="16" y="80" width="343" height="36"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enjoy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H4w-Ak-lQo">
-                                <rect key="frame" x="169" y="124" width="37" height="19.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upgrade To Premium" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H4w-Ak-lQo">
+                                <rect key="frame" x="117.5" y="124" width="140.5" height="19.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -439,10 +439,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="drJ-ny-dxc">
-                                <rect key="frame" x="92" y="561.5" width="191" height="63.5"/>
+                                <rect key="frame" x="92" y="561" width="191" height="64"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="drJ-ny-dxc" secondAttribute="height" multiplier="3:1" id="Sl4-yc-Lxf"/>
+                                    <constraint firstAttribute="height" constant="64" id="S7P-z2-inD"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="17"/>
                                 <state key="normal" title="Upgrade">
@@ -536,6 +536,7 @@
                         <outlet property="annualLabel1" destination="FGW-fc-1bh" id="hPR-Az-KV1"/>
                         <outlet property="annualLabel2" destination="hHl-aW-jgB" id="QJR-KX-hSM"/>
                         <outlet property="enjoyLabel" destination="guh-zL-kEU" id="CUB-52-Wo5"/>
+                        <outlet property="imageHeightConstraint" destination="wjI-pT-9Ir" id="Hqd-jR-kRY"/>
                         <outlet property="imageView" destination="l8F-45-lPq" id="dEV-fS-lSt"/>
                         <outlet property="monthlyLabel1" destination="fds-8D-ODX" id="arp-kW-yKz"/>
                         <outlet property="monthlyLabel2" destination="zaT-sb-tOc" id="swe-gZ-g47"/>

@@ -8,6 +8,7 @@
 import UIKit
 
 // MARK: - Links and email for settings
+let kAppURL = "https://qr-bar-app.com"
 let kPolicyURL = "https://qr-bar-app.com/policy.html"
 let kTermsURL = "https://qr-bar-app.com/terms.html"
 let kEmail = "support@qr-bar-app.com"

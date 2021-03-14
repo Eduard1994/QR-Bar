@@ -242,10 +242,14 @@ extension UIViewController {
     }
 
     func displayAnimatedActivityIndicatorView() {
-        overlayContainerView.displayAnimatedActivityIndicatorView()
+        DispatchQueue.main.async {
+            self.overlayContainerView.displayAnimatedActivityIndicatorView()
+        }
     }
 
     func hideAnimatedActivityIndicatorView() {
-        overlayContainerView.hideAnimatedActivityIndicatorView()
+        DispatchQueue.main.async {
+            self.overlayContainerView.hideAnimatedActivityIndicatorView()
+        }
     }
 }

@@ -21,7 +21,8 @@ struct Settings {
             Settings(title: "Restore purchase", imageName: "restoreImage"),
             Settings(title: "Contact support", imageName: "supportImage"),
             Settings(title: "Privacy policy", imageName: "privacyImage"),
-            Settings(title: "Terms of use", imageName: "termsImage")
+            Settings(title: "Terms of use", imageName: "termsImage"),
+            Settings(title: "Share App", imageName: "shareImage")
         ]
     }
 }

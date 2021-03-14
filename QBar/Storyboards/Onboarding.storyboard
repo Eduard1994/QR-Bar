@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_5" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -27,24 +27,24 @@
             <objects>
                 <viewController storyboardIdentifier="OnboardingViewController" id="LlC-g8-6Dd" customClass="OnboardingViewController" customModule="QBar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2MU-hb-nSV">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8MY-QY-ESa">
-                                <rect key="frame" x="0.0" y="5" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="delegate" destination="LlC-g8-6Dd" id="hC6-Mu-VjP"/>
                                 </connections>
                             </scrollView>
                             <pageControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="6GM-Wb-raP">
-                                <rect key="frame" x="146.33333333333334" y="731" width="121.33333333333334" height="28"/>
+                                <rect key="frame" x="126.5" y="536" width="122.5" height="28"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="pageIndicatorTintColor" red="0.83921568627450982" green="0.83921568627450982" blue="0.83999999999999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="currentPageIndicatorTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </pageControl>
                             <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="Xq1-sZ-xFJ" customClass="SnakePageControl" customModule="QBar" customModuleProvider="target">
-                                <rect key="frame" x="186" y="741" width="42" height="8"/>
+                                <rect key="frame" x="166.5" y="546" width="42" height="8"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="pageCount">
@@ -71,10 +71,10 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pDX-Qp-snA">
-                                <rect key="frame" x="92" y="750.33333333333337" width="230" height="76.666666666666629"/>
+                                <rect key="frame" x="92" y="568.5" width="191" height="64"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="pDX-Qp-snA" secondAttribute="height" multiplier="3:1" id="nTD-PS-mXV"/>
+                                    <constraint firstAttribute="height" constant="64" id="97Y-R7-Sha"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="17"/>
                                 <state key="normal" image="arrowRight">
@@ -92,11 +92,11 @@
                             <constraint firstItem="8MY-QY-ESa" firstAttribute="width" secondItem="2MU-hb-nSV" secondAttribute="width" id="4MN-l8-b9f"/>
                             <constraint firstItem="8MY-QY-ESa" firstAttribute="centerX" secondItem="Rks-7h-MNZ" secondAttribute="centerX" id="NKb-wq-I7X"/>
                             <constraint firstItem="Xq1-sZ-xFJ" firstAttribute="centerY" secondItem="6GM-Wb-raP" secondAttribute="centerY" id="R3c-iI-CRa"/>
+                            <constraint firstItem="pDX-Qp-snA" firstAttribute="top" secondItem="Xq1-sZ-xFJ" secondAttribute="bottom" constant="14.5" id="ROD-Sq-o68"/>
                             <constraint firstItem="Xq1-sZ-xFJ" firstAttribute="centerX" secondItem="Rks-7h-MNZ" secondAttribute="centerX" id="SOU-gQ-hvj"/>
                             <constraint firstItem="8MY-QY-ESa" firstAttribute="centerY" secondItem="Rks-7h-MNZ" secondAttribute="centerY" id="csG-IC-v0z"/>
                             <constraint firstItem="pDX-Qp-snA" firstAttribute="centerX" secondItem="Rks-7h-MNZ" secondAttribute="centerX" id="dht-Th-eVI"/>
                             <constraint firstItem="Rks-7h-MNZ" firstAttribute="bottom" secondItem="6GM-Wb-raP" secondAttribute="bottom" constant="103" id="fsD-2H-4E3"/>
-                            <constraint firstItem="Rks-7h-MNZ" firstAttribute="bottom" secondItem="pDX-Qp-snA" secondAttribute="bottom" constant="35" id="kjz-dm-lbm"/>
                             <constraint firstItem="Rks-7h-MNZ" firstAttribute="trailing" secondItem="pDX-Qp-snA" secondAttribute="trailing" constant="92" id="pkF-eL-Lj1"/>
                             <constraint firstItem="8MY-QY-ESa" firstAttribute="height" secondItem="2MU-hb-nSV" secondAttribute="height" id="qiF-Ty-iV8"/>
                             <constraint firstItem="Xq1-sZ-xFJ" firstAttribute="centerX" secondItem="6GM-Wb-raP" secondAttribute="centerX" id="umR-vG-892"/>
@@ -119,17 +119,17 @@
             <objects>
                 <viewController storyboardIdentifier="PrivacyViewController" id="2Bn-Kg-r73" customClass="PrivacyViewController" customModule="QBar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7vO-JF-2iN">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jcz-ge-Zr7">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9P3-XU-JrD">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="634.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="642.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="privacyIcon" translatesAutoresizingMaskIntoConstraints="NO" id="G1m-dB-cWd">
-                                                <rect key="frame" x="194.66666666666666" y="62" width="25" height="32"/>
+                                                <rect key="frame" x="175" y="62" width="25" height="32"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="32" id="cGV-YL-G8f"/>
@@ -137,34 +137,34 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your privacy comes first" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uo5-fX-sZd">
-                                                <rect key="frame" x="43.666666666666657" y="128" width="327" height="36"/>
+                                                <rect key="frame" x="24" y="128" width="327" height="36"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="30"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QR-Bar collects a minimal amount of data to offer you a fast and reliable QR service." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TlZ-tX-2l5">
-                                                <rect key="frame" x="16" y="199" width="382" height="36"/>
+                                                <rect key="frame" x="16" y="199" width="343" height="36"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We collect:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZUq-j3-jL5">
-                                                <rect key="frame" x="16" y="251" width="382" height="18"/>
+                                                <rect key="frame" x="16" y="251" width="343" height="18"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="15"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bulletetLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQN-Mg-pxp">
-                                                <rect key="frame" x="16" y="285" width="382" height="18"/>
+                                                <rect key="frame" x="16" y="285" width="343" height="18"/>
                                                 <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4s-OC-odd">
-                                                <rect key="frame" x="16" y="304" width="382" height="143.33333333333337"/>
+                                                <rect key="frame" x="16" y="304" width="343" height="161.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <string key="text">This Service may contain links to other sites. If you click on a third-party link, you will be directed to that site. Note that these external sites are not operated by us. Therefore, we strongly advise you to review the Privacy Policy of these websites. We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services.</string>
                                                 <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
@@ -172,14 +172,14 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For more information, please read our Privacy Policy." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mgM-qg-8hM">
-                                                <rect key="frame" x="16" y="452.33333333333331" width="382" height="36"/>
+                                                <rect key="frame" x="16" y="470.5" width="343" height="36"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="15"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="https://qr-bar-app.com/policy.html" translatesAutoresizingMaskIntoConstraints="NO" id="Vic-Qv-sr2">
-                                                <rect key="frame" x="16" y="493.33333333333337" width="382" height="36"/>
+                                                <rect key="frame" x="16" y="511.5" width="343" height="36"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" red="0.0" green="0.3921568627" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -187,10 +187,10 @@
                                                 <dataDetectorType key="dataDetectorTypes" link="YES" address="YES"/>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OKw-xt-xf1">
-                                                <rect key="frame" x="63" y="545.33333333333337" width="288" height="74"/>
+                                                <rect key="frame" x="63" y="563.5" width="249" height="64"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="OKw-xt-xf1" secondAttribute="height" multiplier="249:64" id="uFB-l9-mJf"/>
+                                                    <constraint firstAttribute="height" constant="64" id="VwW-pZ-04z"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="17"/>
                                                 <state key="normal" title="Accept and continue">
