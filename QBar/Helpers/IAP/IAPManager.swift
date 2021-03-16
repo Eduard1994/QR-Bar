@@ -10,6 +10,7 @@ import StoreKit
 public typealias ProductID = String
 public typealias ProductsRequestCompletionHandler = (_ success: Bool, _ products: [SKProduct]?) -> Void
 public typealias ProductPurchaseCompletionHandler = (_ success: Bool, _ productId: ProductID?) -> Void
+public typealias ProductPriceCompletionHandler = (_ success: Bool, _ productId: ProductID?) -> Void
 
 // MARK: - IAPManager
 public class IAPManager: NSObject  {
@@ -18,6 +19,7 @@ public class IAPManager: NSObject  {
     private var productsRequest: SKProductsRequest?
     private var productsRequestCompletionHandler: ProductsRequestCompletionHandler?
     private var productPurchaseCompletionHandler: ProductPurchaseCompletionHandler?
+    private var productPriceCompletionHandler: ProductPriceCompletionHandler?
     
     public init(productIDs: Set<ProductID>) {
         self.productIDs = productIDs
@@ -44,6 +46,11 @@ extension IAPManager {
         productsRequest = SKProductsRequest(productIdentifiers: productIDs)
         productsRequest!.delegate = self
         productsRequest!.start()
+    }
+    
+    public func getProductPrice(_ product: SKProduct, _ completionHandler: @escaping ProductPriceCompletionHandler) {
+        productPriceCompletionHandler = completionHandler
+        print("Product is = \(product.productIdentifier), price is = \(product.price)")
     }
     
     public func buyProduct(_ product: SKProduct, _ completionHandler: @escaping ProductPurchaseCompletionHandler) {
@@ -144,6 +151,7 @@ extension IAPManager: SKPaymentTransactionObserver {
         }
         
         productPurchaseCompletionHandler?(false, nil)
+        productPriceCompletionHandler?(false, nil)
         SKPaymentQueue.default().finishTransaction(transaction)
         clearHandler()
     }
@@ -154,6 +162,7 @@ extension IAPManager: SKPaymentTransactionObserver {
         purchasedProductIDs.insert(identifier)
         UserDefaults.standard.set(true, forKey: identifier) // Changing
         productPurchaseCompletionHandler?(true, identifier)
+        productPriceCompletionHandler?(true, identifier)
         clearHandler()
     }
     

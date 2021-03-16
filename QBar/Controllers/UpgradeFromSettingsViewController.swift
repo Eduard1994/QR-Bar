@@ -25,6 +25,7 @@ class UpgradeFromSettingsViewController: UIViewController {
     
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var closeButton: UIButton!
     
     // MARK: - Properties
     let service = Service()
@@ -56,32 +57,34 @@ class UpgradeFromSettingsViewController: UIViewController {
         
         print(products)
         
-        service.getOnboardingTitles(for: PremiumTab.Onboarding.rawValue) { (onboarding, error) in
+        service.getSubscribeTitles(for: PremiumTab.Subscribe.rawValue) { (subscribe, error) in
             if let error = error {
                 ErrorHandling.showError(message: error.localizedDescription, controller: self)
                 DispatchQueue.main.async {
-                    self.configureSlideLabels(onboarding: OnboardingTitle())
+                    self.configureSlideLabels(subscribe: SubscribeTitle())
                 }
                 return
             }
-            if let onboarding = onboarding {
+            if let subscribe = subscribe {
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
-                    self.configureSlideLabels(onboarding: onboarding)
+                    self.configureSlideLabels(subscribe: subscribe)
                 }
             }
         }
     }
     
-    private func configureSlideLabels(onboarding: OnboardingTitle) {
-        self.premiumLabel.text = onboarding.firstTitle
-        self.enjoyLabel.text = onboarding.secondTitle
-        self.annualLabel1.text = onboarding.annualFirstTitle
-        self.annualLabel2.text = onboarding.annualSecondTitle
-        self.monthlyLabel1.text = onboarding.monthlyFirstTitle
-        self.monthlyLabel2.text = onboarding.monthlySecondTitle
-        self.weeklyLabel1.text = onboarding.weeklyFirstTitle
-        self.weeklyLabel2.text = onboarding.weeklySecondTitle
+    private func configureSlideLabels(subscribe: SubscribeTitle) {
+        self.closeButton.isHidden = !subscribe.closeButton
+        self.closeButton.isEnabled = subscribe.closeButton
+        self.premiumLabel.text = subscribe.firstTitle
+        self.enjoyLabel.text = subscribe.secondTitle
+        self.annualLabel1.text = subscribe.annualFirstTitle
+        self.annualLabel2.text = subscribe.annualSecondTitle
+        self.monthlyLabel1.text = subscribe.monthlyFirstTitle
+        self.monthlyLabel2.text = subscribe.monthlySecondTitle
+        self.weeklyLabel1.text = subscribe.weeklyFirstTitle
+        self.weeklyLabel2.text = subscribe.weeklySecondTitle
     }
     
     // MARK: - Upgrading product

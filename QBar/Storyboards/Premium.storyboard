@@ -36,7 +36,7 @@
                                     <constraint firstAttribute="height" constant="320" id="BqS-h2-Oh2"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JLL-S3-FIY">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JLL-S3-FIY">
                                 <rect key="frame" x="319" y="40" width="32" height="32"/>
                                 <state key="normal" image="closeOnboarding"/>
                                 <connections>
@@ -201,13 +201,14 @@
                             <constraint firstItem="aQH-rH-PLt" firstAttribute="centerX" secondItem="hp5-eE-r9V" secondAttribute="centerX" id="bT6-1o-e9C"/>
                             <constraint firstItem="u5R-Oy-aGk" firstAttribute="leading" secondItem="Df0-Ez-FuK" secondAttribute="leading" constant="47" id="gHS-HS-dDd"/>
                             <constraint firstItem="aQH-rH-PLt" firstAttribute="top" secondItem="OhC-vz-IPI" secondAttribute="bottom" constant="1" id="jLy-kc-I0t"/>
+                            <constraint firstItem="u5R-Oy-aGk" firstAttribute="top" secondItem="x4o-mE-3BX" secondAttribute="bottom" constant="80" id="nod-Sy-X99"/>
                             <constraint firstItem="upd-W4-0I8" firstAttribute="top" secondItem="x4o-mE-3BX" secondAttribute="top" constant="48" id="ol1-uz-7Dl"/>
                             <constraint firstItem="OhC-vz-IPI" firstAttribute="centerX" secondItem="hp5-eE-r9V" secondAttribute="centerX" id="sTq-p5-7D8"/>
                             <constraint firstItem="hp5-eE-r9V" firstAttribute="bottom" secondItem="ABu-fs-AHk" secondAttribute="bottom" constant="10" id="sZ4-1z-HxL"/>
-                            <constraint firstItem="u5R-Oy-aGk" firstAttribute="top" secondItem="e1q-Fn-Fng" secondAttribute="bottom" constant="24" id="y8f-kI-GzW"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="closeButton" destination="JLL-S3-FIY" id="um0-3R-Vca"/>
                         <outlet property="enjoyLabel" destination="H4w-Ak-lQo" id="sLC-17-PHU"/>
                         <outlet property="eulaButton" destination="f1Z-cj-xCv" id="q99-1j-69f"/>
                         <outlet property="priceAMonthButton" destination="hFZ-Pf-V9i" id="uSI-N5-aXr"/>
@@ -241,7 +242,7 @@
                                     <constraint firstAttribute="height" constant="480" id="wjI-pT-9Ir"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VJx-1I-fWL">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VJx-1I-fWL">
                                 <rect key="frame" x="319" y="40" width="32" height="32"/>
                                 <state key="normal" image="closeOnboarding"/>
                                 <connections>
@@ -535,6 +536,7 @@
                     <connections>
                         <outlet property="annualLabel1" destination="FGW-fc-1bh" id="hPR-Az-KV1"/>
                         <outlet property="annualLabel2" destination="hHl-aW-jgB" id="QJR-KX-hSM"/>
+                        <outlet property="closeButton" destination="VJx-1I-fWL" id="Mos-qe-RGh"/>
                         <outlet property="enjoyLabel" destination="guh-zL-kEU" id="CUB-52-Wo5"/>
                         <outlet property="imageHeightConstraint" destination="wjI-pT-9Ir" id="Hqd-jR-kRY"/>
                         <outlet property="imageView" destination="l8F-45-lPq" id="dEV-fS-lSt"/>

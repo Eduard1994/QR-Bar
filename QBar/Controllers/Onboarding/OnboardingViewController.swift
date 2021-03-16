@@ -126,21 +126,21 @@ class OnboardingViewController: UIViewController {
         
         setupSlideScrollView(slides: slides)
         
-        service.getSubscribeTitles(for: PremiumTab.Subscribe.rawValue) { (subscribe, error) in
+        service.getOnboardingTitles(for: PremiumTab.Onboarding.rawValue) { (onboarding, error) in
             if let error = error {
                 ErrorHandling.showError(message: error.localizedDescription, controller: self)
-                if let slide = self.slides.last {
+                for slide in self.slides {
                     DispatchQueue.main.async {
-                        self.configureSlideLabels(slide: slide, subscribe: SubscribeTitle())
+                        self.configureSlideLabels(slide: slide, onboarding: OnboardingTitle())
                     }
                 }
                 return
             }
-            if let subscribe = subscribe {
-                if let slide = self.slides.last {
+            if let onboarding = onboarding {
+                for slide in self.slides {
                     DispatchQueue.main.async { [weak self] in
                         guard let self = self else { return }
-                        self.configureSlideLabels(slide: slide, subscribe: subscribe)
+                        self.configureSlideLabels(slide: slide, onboarding: onboarding)
                     }
                 }
             }
@@ -157,16 +157,18 @@ class OnboardingViewController: UIViewController {
         view.bringSubviewToFront(snakePageControl)
     }
     
-    private func configureSlideLabels(slide: Slide, subscribe: SubscribeTitle) {
-        slide.premiumLabel.text = subscribe.firstTitle
-        slide.enjoyLabel.text = subscribe.secondTitle
-        slide.startFreeLabel.text = subscribe.thirdTitle
-        slide.thenLabel.text = subscribe.fourthTitle
-        slide.proceedWithBasicButton.setTitle(subscribe.basicTitle, for: UIControl.State())
-        slide.tryFreeButton.setTitle(subscribe.tryFreeTitle, for: UIControl.State())
-        slide.startMonthlyButton.setTitle(subscribe.startMonthlyFirstTitle, for: UIControl.State())
-        slide.startMonthlySecondButton.setTitle(subscribe.startMonthlySecondTitle, for: UIControl.State())
-        slide.privacyEulaLabel.text = subscribe.privacyEulaTitle
+    private func configureSlideLabels(slide: Slide, onboarding: OnboardingTitle) {
+        slide.closeButton.isHidden = !onboarding.closeButton
+        slide.closeButton.isEnabled = onboarding.closeButton
+        slide.premiumLabel.text = onboarding.firstTitle
+        slide.enjoyLabel.text = onboarding.secondTitle
+        slide.startFreeLabel.text = onboarding.thirdTitle
+        slide.thenLabel.text = onboarding.fourthTitle
+        slide.proceedWithBasicButton.setTitle(onboarding.basicTitle, for: UIControl.State())
+        slide.tryFreeButton.setTitle(onboarding.tryFreeTitle, for: UIControl.State())
+        slide.startMonthlyButton.setTitle(onboarding.startMonthlyFirstTitle, for: UIControl.State())
+        slide.startMonthlySecondButton.setTitle(onboarding.startMonthlySecondTitle, for: UIControl.State())
+        slide.privacyEulaLabel.text = onboarding.privacyEulaTitle
     }
     
     private func purchaseItem(index: Int) {

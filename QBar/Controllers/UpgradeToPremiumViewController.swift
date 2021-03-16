@@ -23,6 +23,7 @@ class UpgradeToPremiumViewController: UIViewController {
     @IBOutlet weak var trialLabel: UILabel!
     @IBOutlet weak var privacyButton: UIButton!
     @IBOutlet weak var eulaButton: UIButton!
+    @IBOutlet weak var closeButton: UIButton!
     
     
     // MARK: - Properties
@@ -58,31 +59,33 @@ class UpgradeToPremiumViewController: UIViewController {
         
         print(products)
         
-        service.getSubscribeTitles(for: PremiumTab.Subscribe.rawValue) { (subscribe, error) in
+        service.getOnboardingTitles(for: PremiumTab.Onboarding.rawValue) { (onboarding, error) in
             if let error = error {
                 ErrorHandling.showError(message: error.localizedDescription, controller: self)
-                self.configureSubscribeTitles(for: SubscribeTitle())
+                self.configureSubscribeTitles(for: OnboardingTitle())
                 return
             }
-            if let subscribe = subscribe {
+            if let onboarding = onboarding {
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
-                    self.configureSubscribeTitles(for: subscribe)
+                    self.configureSubscribeTitles(for: onboarding)
                 }
             }
         }
     }
     
-    private func configureSubscribeTitles(for subscribe: SubscribeTitle) {
-        self.upgradeLabel.text = subscribe.firstTitle
-        self.enjoyLabel.text = subscribe.secondTitle
-        self.startFreeLabel.text = subscribe.thirdTitle
-        self.thenLabel.text = subscribe.fourthTitle
-        self.proceedWithBasicButton.setTitle(subscribe.basicTitle, for: UIControl.State())
-        self.tryFreeButton.setTitle(subscribe.tryFreeTitle, for: UIControl.State())
-        self.startMonthlyButton.setTitle(subscribe.startMonthlyFirstTitle, for: UIControl.State())
-        self.priceAMonthButton.setTitle(subscribe.startMonthlySecondTitle, for: UIControl.State())
-        self.trialLabel.text = subscribe.privacyEulaTitle
+    private func configureSubscribeTitles(for onboarding: OnboardingTitle) {
+        self.closeButton.isHidden = !onboarding.closeButton
+        self.closeButton.isEnabled = onboarding.closeButton
+        self.upgradeLabel.text = onboarding.firstTitle
+        self.enjoyLabel.text = onboarding.secondTitle
+        self.startFreeLabel.text = onboarding.thirdTitle
+        self.thenLabel.text = onboarding.fourthTitle
+        self.proceedWithBasicButton.setTitle(onboarding.basicTitle, for: UIControl.State())
+        self.tryFreeButton.setTitle(onboarding.tryFreeTitle, for: UIControl.State())
+        self.startMonthlyButton.setTitle(onboarding.startMonthlyFirstTitle, for: UIControl.State())
+        self.priceAMonthButton.setTitle(onboarding.startMonthlySecondTitle, for: UIControl.State())
+        self.trialLabel.text = onboarding.privacyEulaTitle
     }
     
     private func purchase(index: Int) {

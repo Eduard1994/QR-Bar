@@ -74,8 +74,8 @@ class Slide: UIView {
             slide1.bottomConstraint.constant = 284
         }
         
-        slide1.closeButton.isHidden = true
-        slide1.closeButton.isEnabled = false
+//        slide1.closeButton.isHidden = true
+//        slide1.closeButton.isEnabled = false
         slide1.startFreeLabel.isHidden = true
         slide1.thenLabel.isHidden = true
         slide1.proceedWithBasicButton.isHidden = true
@@ -103,8 +103,8 @@ class Slide: UIView {
             slide2.bottomConstraint.constant = 284
         }
         
-        slide2.closeButton.isHidden = true
-        slide2.closeButton.isEnabled = false
+//        slide2.closeButton.isHidden = true
+//        slide2.closeButton.isEnabled = false
         slide2.startFreeLabel.isHidden = true
         slide2.thenLabel.isHidden = true
         slide2.proceedWithBasicButton.isHidden = true
@@ -132,8 +132,8 @@ class Slide: UIView {
         slide3.premiumLabel.isHidden = false
         slide3.enjoyLabel.isHidden = false
         
-        slide3.closeButton.isHidden = false
-        slide3.closeButton.isEnabled = true
+//        slide3.closeButton.isHidden = false
+//        slide3.closeButton.isEnabled = true
         slide3.startFreeLabel.isHidden = false
         slide3.thenLabel.isHidden = false
         slide3.proceedWithBasicButton.isHidden = false
