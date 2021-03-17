@@ -172,14 +172,28 @@ class Service {
     
     func tabbedCodes(for tabs: [Tab.RawValue], userID: String, completion: @escaping ([TabbedCodes<Code>]) -> ()) {} // Will be updated soon
     
-    // MARK: - Adding price to Firebase // Will be added soon
-//    func addPrice(for subscriptions: Subscriptions) {
-//        if isConnectedToInternet {
-//            let post =
-//        } else {
-//
-//        }
-//    }
+//     MARK: - Adding price to Firebase // Will be added soon
+    func addPrice(for subscriptions: Subscriptions, completion: @escaping (([String : Any]?, NetworkError?) -> Void)) {
+        if isConnectedToInternet {
+            let post = [
+                "annualProductID": subscriptions.annualProductID,
+                "annualProductPrice": subscriptions.annualProductPrice,
+                "monthlyProductID": subscriptions.monthlyProductID,
+                "monthlyProductPrice": subscriptions.monthlyProductPrice,
+                "weeklyProductID": subscriptions.weeklyProductID,
+                "weeklyProductPrice": subscriptions.weeklyProductPrice
+            ] as [String: Any]
+            premiumSubscriptionsReference.updateChildValues(post) { (error, reference) in
+                if error == nil {
+                    DispatchQueue.main.async {
+                        completion(post, nil)
+                    }
+                }
+            }
+        } else {
+            completion(nil, .noInternet)
+        }
+    }
     
     // MARK: - Adding code to Firebase
     func addNewCode(code: Code, at tab: Tab.RawValue, completion: @escaping (([String : [String : Any]]?, NetworkError?) -> Void)) {

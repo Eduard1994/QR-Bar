@@ -7,39 +7,40 @@
 
 import Foundation
 import FirebaseDatabase
+import StoreKit
 
 var subscriptionPurchases: Set<ProductID> = []
 
 struct Subscriptions {
     var ref: DatabaseReference?
     var key: String?
-    let annualProductID: String
-//    var annualProductPrice: String
-    let monthlyProductID: String
-//    var monthlyProductPrice: String
-    let weeklyProductID: String
-//    var weeklyProductPrice: String
+    var annualProductID: String
+    var annualProductPrice: Double
+    var monthlyProductID: String
+    var monthlyProductPrice: Double
+    var weeklyProductID: String
+    var weeklyProductPrice: Double
     
-    init(annualProductID: String = "", monthlyProductID: String = "", weeklyProductID: String = "") {
+    init(annualProductID: String = "", annualProductPrice: Double = 35.99, monthlyProductID: String = "", monthlyProductPrice: Double = 15.99, weeklyProductID: String = "", weeklyProductPrice: Double = 5.99) {
         self.ref = nil
         self.key = nil
         self.annualProductID = annualProductID
-//        self.annualProductPrice = annualProductPrice
+        self.annualProductPrice = annualProductPrice
         self.monthlyProductID = monthlyProductID
-//        self.monthlyProductPrice = monthlyProductPrice
+        self.monthlyProductPrice = monthlyProductPrice
         self.weeklyProductID = weeklyProductID
-//        self.weeklyProductPrice = weeklyProductPrice
+        self.weeklyProductPrice = weeklyProductPrice
     }
     
     init?(snapshot: DataSnapshot) {
         guard
             let value = snapshot.value as? [String: AnyObject],
             let annualProductID = value["annualProductID"] as? String,
-//            let annualProductPrice = value["annualProductPrice"] as? String,
+            let annualProductPrice = value["annualProductPrice"] as? Double,
             let monthlyProductID = value["monthlyProductID"] as? String,
-//            let monthlyProductPrice = value["monthlyProductPrice"] as? String,
-            let weeklyProductID = value["weeklyProductID"] as? String
-//            let weeklyProductPrice = value["weeklyProductPrice"] as? String
+            let monthlyProductPrice = value["monthlyProductPrice"] as? Double,
+            let weeklyProductID = value["weeklyProductID"] as? String,
+            let weeklyProductPrice = value["weeklyProductPrice"] as? Double
         else {
             return nil
         }
@@ -48,10 +49,10 @@ struct Subscriptions {
         self.key = snapshot.key
         
         self.annualProductID = annualProductID
-//        self.annualProductPrice = annualProductPrice
+        self.annualProductPrice = annualProductPrice
         self.monthlyProductID = monthlyProductID
-//        self.monthlyProductPrice = monthlyProductPrice
+        self.monthlyProductPrice = monthlyProductPrice
         self.weeklyProductID = weeklyProductID
-//        self.weeklyProductPrice = weeklyProductPrice
+        self.weeklyProductPrice = weeklyProductPrice
     }
 }

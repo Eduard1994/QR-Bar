@@ -43,6 +43,7 @@ class MainSegmentedViewController: UIViewController {
     var service: Service!
     var products: [SKProduct] = []
     var store: IAPManager!
+    var subscriptions: Subscriptions!
     
     var cancelled = false
     
@@ -152,13 +153,38 @@ class MainSegmentedViewController: UIViewController {
                     }
                     return
                 }
+                if let products = products {
+                    DispatchQueue.main.async {
+                        self.addPrice(from: products)
+                        self.hideAnimatedActivityIndicatorView()
+                        print(products as Any)
+                        self.products = products
+                        self.onBoardingVC.products = products
+                        print("Product ids are = \(productIDs)")
+                        self.checkProducts(store: store, productIDs: productIDs)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func addPrice(from products: [SKProduct]) {
+        let annualProductID = products[2].productIdentifier
+        let annualProductPrice = products[2].price.floatValue
+        let monthlyProductID = products[0].productIdentifier
+        let monthlyProductPrice = products[0].price.floatValue
+        let weeklyProductID = products[1].productIdentifier
+        let weeklyProductPrice = products[1].price.floatValue
+        let subscriptions = Subscriptions(annualProductID: annualProductID, annualProductPrice: Double(annualProductPrice).rounded(toPlaces: 2), monthlyProductID: monthlyProductID, monthlyProductPrice: Double(monthlyProductPrice).rounded(toPlaces: 2), weeklyProductID: weeklyProductID, weeklyProductPrice: Double(weeklyProductPrice).rounded(toPlaces: 2))
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.service.addPrice(for: subscriptions) { (childUpdates, error) in
                 DispatchQueue.main.async {
-                    self.hideAnimatedActivityIndicatorView()
-                    print(products as Any)
-                    self.products = products!
-                    self.onBoardingVC.products = products!
-                    print("Product ids are = \(productIDs)")
-                    self.checkProducts(store: store, productIDs: productIDs)
+                    if error == nil {
+                        print("Succeeded")
+                        self.onBoardingVC.subscriptions = subscriptions
+                        self.recentsVC.subscriptions = subscriptions
+                        self.settingsVC.subscriptions = subscriptions
+                    }
                 }
             }
         }

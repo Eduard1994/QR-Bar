@@ -28,6 +28,7 @@ class SettingsViewController: UIViewController {
     
     var products: [SKProduct] = []
     var store: IAPManager!
+    var subscriptions: Subscriptions = Subscriptions()
     let service = Service()
     
     // MARK: - Override properties
@@ -134,6 +135,7 @@ class SettingsViewController: UIViewController {
                     self.products = products!
                     self.upgradeFromSettingsVC.products = products!
                     self.upgradeFromSettingsVC.store = self.store
+                    self.upgradeFromSettingsVC.subscriptions = self.subscriptions
                     self.checkProducts(store: store, productIDs: productIDs)
                 }
             }

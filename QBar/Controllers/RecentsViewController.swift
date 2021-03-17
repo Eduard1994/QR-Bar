@@ -47,6 +47,7 @@ class RecentsViewController: UIViewController {
     var service: Service!
     var store: IAPManager!
     var products: [SKProduct] = []
+    var subscriptions: Subscriptions = Subscriptions()
     
     // MARK: - Override properties
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -111,6 +112,7 @@ class RecentsViewController: UIViewController {
     private func presentUpgradeVC() {
         upgradeToPremiumVC.modalPresentationStyle = .fullScreen
         upgradeToPremiumVC.products = self.products
+        upgradeToPremiumVC.subscriptions = self.subscriptions
         upgradeToPremiumVC.store = self.store
         if presentedViewController != upgradeToPremiumVC {
             present(upgradeToPremiumVC, animated: true, completion: nil)

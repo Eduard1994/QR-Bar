@@ -29,6 +29,7 @@ class UpgradeToPremiumViewController: UIViewController {
     // MARK: - Properties
     var products: [SKProduct] = []
     let service = Service()
+    var subscriptions: Subscriptions = Subscriptions()
     var store: IAPManager!
     
     // MARK: - Override properties
@@ -62,29 +63,29 @@ class UpgradeToPremiumViewController: UIViewController {
         service.getOnboardingTitles(for: PremiumTab.Onboarding.rawValue) { (onboarding, error) in
             if let error = error {
                 ErrorHandling.showError(message: error.localizedDescription, controller: self)
-                self.configureSubscribeTitles(for: OnboardingTitle())
+                self.configureSubscribeTitles(for: OnboardingTitle(), subscriptions: self.subscriptions)
                 return
             }
             if let onboarding = onboarding {
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
-                    self.configureSubscribeTitles(for: onboarding)
+                    self.configureSubscribeTitles(for: onboarding, subscriptions: self.subscriptions)
                 }
             }
         }
     }
     
-    private func configureSubscribeTitles(for onboarding: OnboardingTitle) {
+    private func configureSubscribeTitles(for onboarding: OnboardingTitle, subscriptions: Subscriptions) {
         self.closeButton.isHidden = !onboarding.closeButton
         self.closeButton.isEnabled = onboarding.closeButton
         self.upgradeLabel.text = onboarding.firstTitle
         self.enjoyLabel.text = onboarding.secondTitle
         self.startFreeLabel.text = onboarding.thirdTitle
-        self.thenLabel.text = onboarding.fourthTitle
+        self.thenLabel.text = "\(onboarding.fourthTitle) $\(subscriptions.monthlyProductPrice) a month"
         self.proceedWithBasicButton.setTitle(onboarding.basicTitle, for: UIControl.State())
         self.tryFreeButton.setTitle(onboarding.tryFreeTitle, for: UIControl.State())
         self.startMonthlyButton.setTitle(onboarding.startMonthlyFirstTitle, for: UIControl.State())
-        self.priceAMonthButton.setTitle(onboarding.startMonthlySecondTitle, for: UIControl.State())
+        self.priceAMonthButton.setTitle("$\(subscriptions.monthlyProductPrice) \(onboarding.startMonthlySecondTitle)", for: UIControl.State())
         self.trialLabel.text = onboarding.privacyEulaTitle
     }
     

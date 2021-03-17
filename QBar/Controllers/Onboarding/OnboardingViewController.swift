@@ -18,6 +18,7 @@ class OnboardingViewController: UIViewController {
     // MARK: - Properties
     var slides: [Slide] = []
     var products: [SKProduct] = []
+    var subscriptions: Subscriptions = Subscriptions()
     var store: IAPManager!
     var productIndex = 2
     let service = Service()
@@ -131,7 +132,7 @@ class OnboardingViewController: UIViewController {
                 ErrorHandling.showError(message: error.localizedDescription, controller: self)
                 for slide in self.slides {
                     DispatchQueue.main.async {
-                        self.configureSlideLabels(slide: slide, onboarding: OnboardingTitle())
+                        self.configureSlideLabels(slide: slide, onboarding: OnboardingTitle(), subscriptions: self.subscriptions)
                     }
                 }
                 return
@@ -140,7 +141,7 @@ class OnboardingViewController: UIViewController {
                 for slide in self.slides {
                     DispatchQueue.main.async { [weak self] in
                         guard let self = self else { return }
-                        self.configureSlideLabels(slide: slide, onboarding: onboarding)
+                        self.configureSlideLabels(slide: slide, onboarding: onboarding, subscriptions: self.subscriptions)
                     }
                 }
             }
@@ -157,17 +158,17 @@ class OnboardingViewController: UIViewController {
         view.bringSubviewToFront(snakePageControl)
     }
     
-    private func configureSlideLabels(slide: Slide, onboarding: OnboardingTitle) {
+    private func configureSlideLabels(slide: Slide, onboarding: OnboardingTitle, subscriptions: Subscriptions) {
         slide.closeButton.isHidden = !onboarding.closeButton
         slide.closeButton.isEnabled = onboarding.closeButton
         slide.premiumLabel.text = onboarding.firstTitle
         slide.enjoyLabel.text = onboarding.secondTitle
         slide.startFreeLabel.text = onboarding.thirdTitle
-        slide.thenLabel.text = onboarding.fourthTitle
+        slide.thenLabel.text = "\(onboarding.fourthTitle) $\(subscriptions.monthlyProductPrice) a month"
         slide.proceedWithBasicButton.setTitle(onboarding.basicTitle, for: UIControl.State())
         slide.tryFreeButton.setTitle(onboarding.tryFreeTitle, for: UIControl.State())
         slide.startMonthlyButton.setTitle(onboarding.startMonthlyFirstTitle, for: UIControl.State())
-        slide.startMonthlySecondButton.setTitle(onboarding.startMonthlySecondTitle, for: UIControl.State())
+        slide.startMonthlySecondButton.setTitle("$\(subscriptions.monthlyProductPrice) \(onboarding.startMonthlySecondTitle)", for: UIControl.State())
         slide.privacyEulaLabel.text = onboarding.privacyEulaTitle
     }
     

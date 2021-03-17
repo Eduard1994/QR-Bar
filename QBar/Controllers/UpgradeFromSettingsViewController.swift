@@ -30,6 +30,7 @@ class UpgradeFromSettingsViewController: UIViewController {
     // MARK: - Properties
     let service = Service()
     var products: [SKProduct] = []
+    var subscriptions: Subscriptions = Subscriptions()
     var store: IAPManager!
     var typeIndex = 2
     
@@ -61,30 +62,31 @@ class UpgradeFromSettingsViewController: UIViewController {
             if let error = error {
                 ErrorHandling.showError(message: error.localizedDescription, controller: self)
                 DispatchQueue.main.async {
-                    self.configureSlideLabels(subscribe: SubscribeTitle())
+                    self.configureSlideLabels(subscribe: SubscribeTitle(), subscriptions: self.subscriptions)
                 }
                 return
             }
             if let subscribe = subscribe {
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
-                    self.configureSlideLabels(subscribe: subscribe)
+                    self.configureSlideLabels(subscribe: subscribe, subscriptions: self.subscriptions)
                 }
             }
         }
     }
     
-    private func configureSlideLabels(subscribe: SubscribeTitle) {
+    private func configureSlideLabels(subscribe: SubscribeTitle, subscriptions: Subscriptions) {
         self.closeButton.isHidden = !subscribe.closeButton
         self.closeButton.isEnabled = subscribe.closeButton
         self.premiumLabel.text = subscribe.firstTitle
         self.enjoyLabel.text = subscribe.secondTitle
         self.annualLabel1.text = subscribe.annualFirstTitle
-        self.annualLabel2.text = subscribe.annualSecondTitle
+//        self.annualLabel2.text = subscribe.annualSecondTitle
+        self.annualLabel2.text = "\(subscribe.annualSecondTitle) $\(subscriptions.annualProductPrice)/year"
         self.monthlyLabel1.text = subscribe.monthlyFirstTitle
-        self.monthlyLabel2.text = subscribe.monthlySecondTitle
+        self.monthlyLabel2.text = "\(subscribe.monthlySecondTitle) $\(subscriptions.monthlyProductPrice)/month"
         self.weeklyLabel1.text = subscribe.weeklyFirstTitle
-        self.weeklyLabel2.text = subscribe.weeklySecondTitle
+        self.weeklyLabel2.text = "\(subscribe.weeklySecondTitle) $\(subscriptions.weeklyProductPrice)/week"
     }
     
     // MARK: - Upgrading product

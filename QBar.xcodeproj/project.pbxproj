@@ -95,6 +95,7 @@
 		FFE4128B25F07BD30025662E /* PremiumTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE4128A25F07BD30025662E /* PremiumTitle.swift */; };
 		FFE4129025F087100025662E /* RecentsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE4128F25F087100025662E /* RecentsDetailViewController.swift */; };
 		FFE4129525F091570025662E /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE4129425F091570025662E /* UITextField+Extension.swift */; };
+		FFF5E3022601ADFD007323E6 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF5E3012601ADFD007323E6 /* Double+Extension.swift */; };
 		FFF7146925EDB12500983624 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF7146825EDB12500983624 /* User.swift */; };
 		FFFE9D2D25F46DAC004CBF98 /* NetworkActivityIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFE9D2C25F46DAC004CBF98 /* NetworkActivityIndicatorManager.swift */; };
 /* End PBXBuildFile section */
@@ -217,6 +218,7 @@
 		FFE4128A25F07BD30025662E /* PremiumTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumTitle.swift; sourceTree = "<group>"; };
 		FFE4128F25F087100025662E /* RecentsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsDetailViewController.swift; sourceTree = "<group>"; };
 		FFE4129425F091570025662E /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		FFF5E3012601ADFD007323E6 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		FFF7146825EDB12500983624 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FFFE9D2C25F46DAC004CBF98 /* NetworkActivityIndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkActivityIndicatorManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -603,6 +605,7 @@
 				FF197D0625EC894F002439D4 /* NSLayoutConstraint+Extension.swift */,
 				FF57A21225EDCD8F00A69D08 /* String+extension.swift */,
 				FF57A21725EDCDAB00A69D08 /* Date+Extension.swift */,
+				FFF5E3012601ADFD007323E6 /* Double+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -898,6 +901,7 @@
 				FFF7146925EDB12500983624 /* User.swift in Sources */,
 				FFB8A38F25E9BF1B00DA1E67 /* PrivacyViewController.swift in Sources */,
 				FFA0F16E25E8E72900C79D8C /* UIFont+Extenstion.swift in Sources */,
+				FFF5E3022601ADFD007323E6 /* Double+Extension.swift in Sources */,
 				FFD7E69725F31FEF00B176F4 /* UpgradeFromSettingsViewController.swift in Sources */,
 				FF12995A25EC74D30092C055 /* Service.swift in Sources */,
 				FF197D3525EC8CDC002439D4 /* QRBarcodeScannerViewController.swift in Sources */,
@@ -1133,7 +1137,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pcmrail.qr-bar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1155,7 +1159,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pcmrail.qr-bar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
