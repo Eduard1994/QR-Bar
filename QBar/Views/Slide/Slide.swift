@@ -10,10 +10,6 @@ import UIKit
 let dismissNotification: Notification.Name = Notification.Name(rawValue: "DismissNotification")
 let subTypeNotificationIndex: Notification.Name = Notification.Name("NotificationIndex")
 
-let screenSize = UIScreen.main.bounds
-let screenWidth = screenSize.width
-let screenHeight = screenSize.height
-
 class Slide: UIView {
     
     // MARK: - IBOutlets
@@ -21,8 +17,8 @@ class Slide: UIView {
     @IBOutlet weak var firstLabel: UILabel!
     @IBOutlet weak var secondLabel: UILabel!
     @IBOutlet weak var closeButton: UIButton!
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint! // 315 for upgrade
-    @IBOutlet weak var topConstraint: NSLayoutConstraint! // 48 for upgrade
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint! // 251 for custom
+    @IBOutlet weak var topConstraint: NSLayoutConstraint! // 92 for custom
     
     @IBOutlet weak var premiumLabel: UILabel!
     @IBOutlet weak var enjoyLabel: UILabel!
@@ -47,7 +43,7 @@ class Slide: UIView {
     
     // MARK: - Properties
     static var slides: [Slide] {
-        print("Screen Height = \(screenHeight)")
+        print("Screen Height = \(UIScreen.main.bounds.height)")
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.12
 
@@ -66,14 +62,27 @@ class Slide: UIView {
         slide1.secondLabel.attributedText = NSMutableAttributedString(string: "Instant scanning QR code", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
         slide1.premiumLabel.isHidden = true
         slide1.enjoyLabel.isHidden = true
-        if screenHeight > 736 {
-            slide1.bottomConstraint.constant = 360
-        } else if screenHeight <= 667 {
-            slide1.bottomConstraint.constant = 215
-        } else {
-            slide1.bottomConstraint.constant = 284
-        }
         
+        switch type {
+        case .iPhone5_5S_5C_SE:
+            slide1.bottomConstraint.constant = 284
+        case .iPhone6_6S_7_8_SE2:
+            slide1.bottomConstraint.constant = 284
+        case .iPhone6Plus_6SPlus_7Plus_8Plus:
+            slide1.bottomConstraint.constant = 284
+        case .iPhone12Mini:
+            slide1.bottomConstraint.constant = 314
+        case .iPhoneX_XS_11Pro:
+            slide1.bottomConstraint.constant = 314
+        case .iPhone12_12Pro:
+            slide1.bottomConstraint.constant = 314
+        case .iPhoneXR_XSMax_11_11ProMax:
+            slide1.bottomConstraint.constant = 314
+        case .iPhone12ProMax:
+            slide1.bottomConstraint.constant = 314
+        default:
+            break
+        }
 //        slide1.closeButton.isHidden = true
 //        slide1.closeButton.isEnabled = false
         slide1.startFreeLabel.isHidden = true
@@ -95,12 +104,26 @@ class Slide: UIView {
         slide2.secondLabel.attributedText = NSMutableAttributedString(string: "Easily scan barcodes", attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
         slide2.premiumLabel.isHidden = true
         slide2.enjoyLabel.isHidden = true
-        if screenHeight > 736 {
-            slide2.bottomConstraint.constant = 360
-        } else if screenHeight <= 667 {
-            slide2.bottomConstraint.constant = 215
-        } else {
+        
+        switch type {
+        case .iPhone5_5S_5C_SE:
             slide2.bottomConstraint.constant = 284
+        case .iPhone6_6S_7_8_SE2:
+            slide2.bottomConstraint.constant = 284
+        case .iPhone6Plus_6SPlus_7Plus_8Plus:
+            slide2.bottomConstraint.constant = 284
+        case .iPhone12Mini:
+            slide2.bottomConstraint.constant = 314
+        case .iPhoneX_XS_11Pro:
+            slide2.bottomConstraint.constant = 314
+        case .iPhone12_12Pro:
+            slide2.bottomConstraint.constant = 314
+        case .iPhoneXR_XSMax_11_11ProMax:
+            slide2.bottomConstraint.constant = 314
+        case .iPhone12ProMax:
+            slide2.bottomConstraint.constant = 314
+        default:
+            break
         }
         
 //        slide2.closeButton.isHidden = true
@@ -122,10 +145,26 @@ class Slide: UIView {
         slide3.imageView.image = UIImage(named: "upgradeBackground")
         slide3.firstLabel.text = nil
         slide3.secondLabel.text = nil
-        if screenHeight > 736 {
-            slide3.bottomConstraint.constant = 400
-        } else {
+        
+        switch type {
+        case .iPhone5_5S_5C_SE:
             slide3.bottomConstraint.constant = 315
+        case .iPhone6_6S_7_8_SE2:
+            slide3.bottomConstraint.constant = 315
+        case .iPhone6Plus_6SPlus_7Plus_8Plus:
+            slide3.bottomConstraint.constant = 315
+        case .iPhone12Mini:
+            slide3.bottomConstraint.constant = 345
+        case .iPhoneX_XS_11Pro:
+            slide3.bottomConstraint.constant = 345
+        case .iPhone12_12Pro:
+            slide3.bottomConstraint.constant = 345
+        case .iPhoneXR_XSMax_11_11ProMax:
+            slide3.bottomConstraint.constant = 345
+        case .iPhone12ProMax:
+            slide3.bottomConstraint.constant = 345
+        default:
+            break
         }
         
         slide3.topConstraint.constant = 48

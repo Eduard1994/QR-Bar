@@ -95,6 +95,7 @@
 		FFE4128B25F07BD30025662E /* PremiumTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE4128A25F07BD30025662E /* PremiumTitle.swift */; };
 		FFE4129025F087100025662E /* RecentsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE4128F25F087100025662E /* RecentsDetailViewController.swift */; };
 		FFE4129525F091570025662E /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE4129425F091570025662E /* UITextField+Extension.swift */; };
+		FFE56CD32606C53C00A8370A /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE56CD22606C53C00A8370A /* UIDevice+Extension.swift */; };
 		FFF5E3022601ADFD007323E6 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF5E3012601ADFD007323E6 /* Double+Extension.swift */; };
 		FFF7146925EDB12500983624 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF7146825EDB12500983624 /* User.swift */; };
 		FFFE9D2D25F46DAC004CBF98 /* NetworkActivityIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFE9D2C25F46DAC004CBF98 /* NetworkActivityIndicatorManager.swift */; };
@@ -218,6 +219,7 @@
 		FFE4128A25F07BD30025662E /* PremiumTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumTitle.swift; sourceTree = "<group>"; };
 		FFE4128F25F087100025662E /* RecentsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsDetailViewController.swift; sourceTree = "<group>"; };
 		FFE4129425F091570025662E /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		FFE56CD22606C53C00A8370A /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
 		FFF5E3012601ADFD007323E6 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		FFF7146825EDB12500983624 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FFFE9D2C25F46DAC004CBF98 /* NetworkActivityIndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkActivityIndicatorManager.swift; sourceTree = "<group>"; };
@@ -510,11 +512,11 @@
 		FFA0F0E125E8CD3900C79D8C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				FF3921C925F00823006DEED3 /* IAP */,
 				FFA0F0E225E8CD4600C79D8C /* Switcher.swift */,
 				FF601C7F25EEDC950015DD22 /* Cache.swift */,
 				FF58971525F414AE00CEBE62 /* ErrorHandling.swift */,
 				FF51F5E625F471B900A1D945 /* StoreKit.swift */,
+				FF3921C925F00823006DEED3 /* IAP */,
 				FF8FE9C225E9849100E1DBD2 /* SnakePageControl */,
 				FF4BB46825EAB35500A461D4 /* SegmentedControl */,
 			);
@@ -547,7 +549,6 @@
 		FFA0F0F825E8CE4300C79D8C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				FFA0F14225E8DF7200C79D8C /* Images */,
 				FFA0F0F925E8CE5000C79D8C /* Fonts */,
 			);
 			path = Resources;
@@ -601,6 +602,7 @@
 				FFA0F16325E8E42400C79D8C /* UIColor+Extension.swift */,
 				FFA0F16D25E8E72900C79D8C /* UIFont+Extenstion.swift */,
 				FF4151AF25EACF990099E289 /* UITableView+Extension.swift */,
+				FFE56CD22606C53C00A8370A /* UIDevice+Extension.swift */,
 				FF6CD7E825EC8297000C619B /* AVMetadataObject+Extension.swift */,
 				FF197D0625EC894F002439D4 /* NSLayoutConstraint+Extension.swift */,
 				FF57A21225EDCD8F00A69D08 /* String+extension.swift */,
@@ -608,13 +610,6 @@
 				FFF5E3012601ADFD007323E6 /* Double+Extension.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		FFA0F14225E8DF7200C79D8C /* Images */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Images;
 			sourceTree = "<group>";
 		};
 		FFB6EA8B25EAEC1500290F89 /* FooterView */ = {
@@ -923,6 +918,7 @@
 				FF4BB46225EAB31400A461D4 /* SegmentedControlSegment.swift in Sources */,
 				FFA0F0E325E8CD4600C79D8C /* Switcher.swift in Sources */,
 				FF197D2D25EC8C6B002439D4 /* State.swift in Sources */,
+				FFE56CD32606C53C00A8370A /* UIDevice+Extension.swift in Sources */,
 				FF58DB8D25EBFD99002F18F9 /* SettingsTableViewCell.swift in Sources */,
 				FF7E46BC25EEA369005C48B1 /* ImagePicker.swift in Sources */,
 				FF4BB47725EAB4B800A461D4 /* SegmentedControl+IBDesignable.swift in Sources */,

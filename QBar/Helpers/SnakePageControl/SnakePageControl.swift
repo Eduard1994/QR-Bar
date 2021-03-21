@@ -7,8 +7,6 @@
 
 import UIKit
 
-import UIKit
-
 @IBDesignable open class SnakePageControl: UIView {
     // MARK: - PageControl
     @IBInspectable open var pageCount: Int = 0 {

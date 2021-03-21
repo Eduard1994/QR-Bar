@@ -38,13 +38,13 @@
                                 </connections>
                             </scrollView>
                             <pageControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="6GM-Wb-raP">
-                                <rect key="frame" x="126.5" y="536" width="122.5" height="28"/>
+                                <rect key="frame" x="126.5" y="462" width="122.5" height="102"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="pageIndicatorTintColor" red="0.83921568627450982" green="0.83921568627450982" blue="0.83999999999999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="currentPageIndicatorTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </pageControl>
                             <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="Xq1-sZ-xFJ" customClass="SnakePageControl" customModule="QBar" customModuleProvider="target">
-                                <rect key="frame" x="166.5" y="546" width="42" height="8"/>
+                                <rect key="frame" x="166.5" y="509" width="42" height="8"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="pageCount">
@@ -71,7 +71,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pDX-Qp-snA">
-                                <rect key="frame" x="92" y="568.5" width="191" height="64"/>
+                                <rect key="frame" x="92" y="531.5" width="191" height="64"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="97Y-R7-Sha"/>
@@ -100,7 +100,7 @@
                             <constraint firstItem="Rks-7h-MNZ" firstAttribute="trailing" secondItem="pDX-Qp-snA" secondAttribute="trailing" constant="92" id="pkF-eL-Lj1"/>
                             <constraint firstItem="8MY-QY-ESa" firstAttribute="height" secondItem="2MU-hb-nSV" secondAttribute="height" id="qiF-Ty-iV8"/>
                             <constraint firstItem="Xq1-sZ-xFJ" firstAttribute="centerX" secondItem="6GM-Wb-raP" secondAttribute="centerX" id="umR-vG-892"/>
-                            <constraint firstItem="Rks-7h-MNZ" firstAttribute="bottom" secondItem="Xq1-sZ-xFJ" secondAttribute="bottom" constant="113" id="vtR-mw-LWZ"/>
+                            <constraint firstItem="Rks-7h-MNZ" firstAttribute="bottom" secondItem="Xq1-sZ-xFJ" secondAttribute="bottom" constant="150" id="vtR-mw-LWZ"/>
                             <constraint firstItem="pDX-Qp-snA" firstAttribute="leading" secondItem="Rks-7h-MNZ" secondAttribute="leading" constant="92" id="wLD-bz-Bl5"/>
                         </constraints>
                     </view>
@@ -126,7 +126,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9P3-XU-JrD">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="642.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="699"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="privacyIcon" translatesAutoresizingMaskIntoConstraints="NO" id="G1m-dB-cWd">
                                                 <rect key="frame" x="175" y="62" width="25" height="32"/>
@@ -208,7 +208,7 @@
                                             <constraint firstAttribute="trailing" secondItem="mgM-qg-8hM" secondAttribute="trailing" constant="16" id="3zB-hX-hvT"/>
                                             <constraint firstItem="TlZ-tX-2l5" firstAttribute="centerX" secondItem="uo5-fX-sZd" secondAttribute="centerX" id="5wv-gh-1SS"/>
                                             <constraint firstItem="ZUq-j3-jL5" firstAttribute="leading" secondItem="9P3-XU-JrD" secondAttribute="leading" constant="16" id="7t1-GK-ajb"/>
-                                            <constraint firstAttribute="bottom" secondItem="OKw-xt-xf1" secondAttribute="bottom" constant="15" id="Ca5-Yz-ghd"/>
+                                            <constraint firstAttribute="bottom" secondItem="OKw-xt-xf1" secondAttribute="bottom" constant="71.5" id="Ca5-Yz-ghd"/>
                                             <constraint firstItem="Vic-Qv-sr2" firstAttribute="top" secondItem="mgM-qg-8hM" secondAttribute="bottom" constant="5" id="ERX-kW-9sw"/>
                                             <constraint firstItem="G1m-dB-cWd" firstAttribute="top" secondItem="9P3-XU-JrD" secondAttribute="top" constant="62" id="IDy-It-52m"/>
                                             <constraint firstItem="mgM-qg-8hM" firstAttribute="top" secondItem="b4s-OC-odd" secondAttribute="bottom" constant="5" id="Ksd-NH-OPt"/>
