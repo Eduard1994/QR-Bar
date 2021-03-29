@@ -62,20 +62,20 @@ class UpgradeFromSettingsViewController: UIViewController {
             if let error = error {
                 ErrorHandling.showError(message: error.localizedDescription, controller: self)
                 DispatchQueue.main.async {
-                    self.configureSlideLabels(subscribe: SubscribeTitle(), subscriptions: self.subscriptions)
+                    self.configureSubscribeTitles(subscribe: SubscribeTitle(), subscriptions: self.subscriptions)
                 }
                 return
             }
             if let subscribe = subscribe {
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
-                    self.configureSlideLabels(subscribe: subscribe, subscriptions: self.subscriptions)
+                    self.configureSubscribeTitles(subscribe: subscribe, subscriptions: self.subscriptions)
                 }
             }
         }
     }
     
-    private func configureSlideLabels(subscribe: SubscribeTitle, subscriptions: Subscriptions) {
+    private func configureSubscribeTitles(subscribe: SubscribeTitle, subscriptions: Subscriptions) {
         self.closeButton.isHidden = !subscribe.closeButton
         self.closeButton.isEnabled = subscribe.closeButton
         self.premiumLabel.text = subscribe.firstTitle
