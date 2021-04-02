@@ -7,17 +7,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "666B456E-DD55-4181-902B-6D332A3E8299"
+            uuid = "44D2C773-D3AD-4B19-9531-FE43A715F054"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QBar/Views/Slide/Slide.swift"
+            filePath = "QBar/Helpers/Switcher.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "slides"
-            landmarkType = "24">
+            startingLineNumber = "137"
+            endingLineNumber = "137"
+            landmarkName = "getInfoAndVerify()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

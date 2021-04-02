@@ -6,7 +6,12 @@
 //
 
 import UIKit
-import StoreKit
+//import StoreKit
+
+protocol UpgradeFromRecentsDelegate: class {
+    func dismissFromUpgrade()
+    func purchased(purchases: [ProductID])
+}
 
 class UpgradeToPremiumViewController: UIViewController {
     
@@ -27,10 +32,13 @@ class UpgradeToPremiumViewController: UIViewController {
     
     
     // MARK: - Properties
-    var products: [SKProduct] = []
+//    var products: [SKProduct] = []
     let service = Service()
+    var productIDs: Set<ProductID> = []
     var subscriptions: Subscriptions = Subscriptions()
-    var store: IAPManager!
+//    var store: IAPManager!
+    
+    weak var delegate: UpgradeFromRecentsDelegate?
     
     // MARK: - Override properties
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -58,7 +66,7 @@ class UpgradeToPremiumViewController: UIViewController {
         startMonthlyView.cornerRadius(to: 20)
         startMonthlyView.addBorder(width: 2.0, color: .mainBlack)
         
-        print(products)
+//        print(products)
         
         service.getOnboardingTitles(for: PremiumTab.Onboarding.rawValue) { (onboarding, error) in
             if let error = error {
@@ -76,61 +84,137 @@ class UpgradeToPremiumViewController: UIViewController {
     }
     
     private func configureSubscribeTitles(for onboarding: OnboardingTitle, subscriptions: Subscriptions) {
+        if allPrices.count > 0 {
+            for (title, price) in allPrices {
+                if title.contains("Monthly") {
+                    self.thenLabel.text = "\(onboarding.fourthTitle) \(price) a month"
+                    self.priceAMonthButton.setTitle("\(price) \(onboarding.startMonthlySecondTitle)", for: UIControl.State())
+                }
+            }
+        } else {
+            self.thenLabel.text = "\(onboarding.fourthTitle) -- a month"
+            self.priceAMonthButton.setTitle("-- \(onboarding.startMonthlySecondTitle)", for: UIControl.State())
+        }
+        
         self.closeButton.isHidden = !onboarding.closeButton
         self.closeButton.isEnabled = onboarding.closeButton
         self.upgradeLabel.text = onboarding.firstTitle
         self.enjoyLabel.text = onboarding.secondTitle
         self.startFreeLabel.text = onboarding.thirdTitle
-        self.thenLabel.text = "\(onboarding.fourthTitle) $\(subscriptions.monthlyProductPrice) a month"
         self.proceedWithBasicButton.setTitle(onboarding.basicTitle, for: UIControl.State())
         self.tryFreeButton.setTitle(onboarding.tryFreeTitle, for: UIControl.State())
         self.startMonthlyButton.setTitle(onboarding.startMonthlyFirstTitle, for: UIControl.State())
-        self.priceAMonthButton.setTitle("$\(subscriptions.monthlyProductPrice) \(onboarding.startMonthlySecondTitle)", for: UIControl.State())
         self.trialLabel.text = onboarding.privacyEulaTitle
     }
     
-    private func purchase(index: Int) {
-        print(products)
+    /// Purchasing product
+    private func purchaseItem(productID: String) {
         displayAnimatedActivityIndicatorView()
-        guard !products.isEmpty else {
-            self.hideAnimatedActivityIndicatorView()
-            print("Cannot purchase subscription because products is empty!")
-            return
-        }
-        self.store.buyProduct(products[index]) { [weak self] success, productId in
-            guard let self = self else { return }
-            guard success else {
+        StoreKit.shared.purchase(productID, atomically: true) { (result) in
+            switch result {
+            case .success(let purchase):
+                print("Purchase Success: \(purchase.productId)")
+                StoreKit.shared.finishPurchasing(purchase: purchase)
                 self.hideAnimatedActivityIndicatorView()
-                DispatchQueue.main.async {
-                    self.alert(title: "Failed to purchase product", message: "Check logs for details", preferredStyle: .alert, actionTitle: "OK")
+                purchasedAny = true
+                self.alert(title: "Purchase Success", message: "\(purchase.product.localizedTitle), \(purchase.product.localizedPrice ?? "")", preferredStyle: .alert, cancelTitle: nil, cancelHandler: nil, actionTitle: "OK", actionHandler: {
+                    self.dismiss(animated: true, completion: nil)
+                    self.delegate?.purchased(purchases: [purchase.productId])
+                })
+            case .error(let error):
+                self.hideAnimatedActivityIndicatorView()
+                ErrorHandling.showError(title: "Purchase failed", message: error.localizedDescription, controller: self)
+                print("Purchase Failed: \(error)")
+                switch error.code {
+                case .unknown:
+                    print("Purchase failed, \(error.localizedDescription)")
+                case .clientInvalid: // client is not allowed to issue the request, etc.
+                    print("Purchase failed, Not allowed to make the payment")
+                case .paymentCancelled: // user cancelled the request, etc.
+                    break
+                case .paymentInvalid: // purchase identifier was invalid, etc.
+                    print("Purchase failed, The purchase identifier was invalid")
+                case .paymentNotAllowed: // this device is not allowed to make the payment
+                    print("Purchase failed, The device is not allowed to make the payment")
+                case .storeProductNotAvailable: // Product is not available in the current storefront
+                    print("Purchase failed, The product is not available in the current storefront")
+                case .cloudServicePermissionDenied: // user has not allowed access to cloud service information
+                    print("Purchase failed, Access to cloud service information is not allowed")
+                case .cloudServiceNetworkConnectionFailed: // the device could not connect to the nework
+                    print("Purchase failed, Could not connect to the network")
+                case .cloudServiceRevoked: // user has revoked permission to use this cloud service
+                    print("Purchase failed, Cloud service was revoked")
+                default:
+                    print("Purchase failed, \(error.localizedDescription)")
                 }
-                return
-            }
-            print("Purchased")
-            DispatchQueue.main.async {
-                self.hideAnimatedActivityIndicatorView()
-                self.dismiss(animated: true, completion: nil)
             }
         }
     }
+    
+//    private func purchase(index: Int) {
+//        print(products)
+//        displayAnimatedActivityIndicatorView()
+//        guard !products.isEmpty else {
+//            self.hideAnimatedActivityIndicatorView()
+//            print("Cannot purchase subscription because products is empty!")
+//            return
+//        }
+//        self.store.buyProduct(products[index]) { [weak self] success, productId in
+//            guard let self = self else { return }
+//            guard success else {
+//                self.hideAnimatedActivityIndicatorView()
+//                DispatchQueue.main.async {
+//                    self.alert(title: "Failed to purchase product", message: "Check logs for details", preferredStyle: .alert, actionTitle: "OK")
+//                }
+//                return
+//            }
+//            print("Purchased")
+//            DispatchQueue.main.async {
+//                self.hideAnimatedActivityIndicatorView()
+//                self.dismiss(animated: true, completion: nil)
+//            }
+//        }
+//    }
     
     // MARK: - IBActions
     @IBAction func proceedWithBasicTapped(_ sender: Any) {
-        NotificationCenter.default.post(name: dismissNotification, object: nil)
+//        NotificationCenter.default.post(name: dismissNotification, object: nil)
         dismiss(animated: true, completion: nil)
+        self.delegate?.dismissFromUpgrade()
     }
     
     @IBAction func tryFreeTapped(_ sender: Any) {
-        purchase(index: 1)
+//        purchase(index: 1)
+        print("Try free tapped")
+        if service.isConnectedToInternet {
+            for productID in productIDs {
+                if productID.contains("year") {
+                    purchaseItem(productID: productID)
+                }
+            }
+        } else {
+            ErrorHandling.showError(message: "Check Internet Connection and try again.", controller: self)
+        }
     }
     
     @IBAction func startMonthlyTapped(_ sender: Any) {
-        purchase(index: 0)
+//        purchase(index: 0)
+        print("Start Monthly Tapped")
+        if service.isConnectedToInternet {
+            for productID in productIDs {
+                if productID.contains("month") {
+                    purchaseItem(productID: productID)
+                }
+            }
+        } else {
+            ErrorHandling.showError(message: "Check Internet Connection and try again.", controller: self)
+        }
     }
     
     @IBAction func closeButtonTapped(_ sender: Any) {
-        NotificationCenter.default.post(name: dismissNotification, object: nil)
+//        NotificationCenter.default.post(name: dismissNotification, object: nil)
         dismiss(animated: true, completion: nil)
+        self.delegate?.dismissFromUpgrade()
     }
     
     @IBAction func privacyTapped(_ sender: Any) {

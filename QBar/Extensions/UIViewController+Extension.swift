@@ -156,6 +156,34 @@ extension UIViewController: UIGestureRecognizerDelegate {
         present(alert, animated: true, completion: nil)
     }
     
+    private func present(_ viewControllerToPresent: UIViewController, style: UIModalPresentationStyle = .fullScreen, animated flag: Bool, completion: (() -> Void)? = nil) {
+        DispatchQueue.main.async {
+            viewControllerToPresent.modalPresentationStyle = style
+            self.present(viewControllerToPresent, animated: flag, completion: completion)
+        }
+    }
+    
+    func push(_ viewControllerToPush: UIViewController, animated flag: Bool) {
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(viewControllerToPush, animated: true)
+        }
+    }
+    
+    func pop(animated flag: Bool) {
+        DispatchQueue.main.async {
+            self.navigationController?.popViewController(animated: flag)
+        }
+    }
+    
+    func presentOverFullScreen(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+        present(viewControllerToPresent, style: .overFullScreen, animated: flag, completion: completion)
+    }
+    
+    func presentPopover(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+        present(viewControllerToPresent, style: .popover, animated: flag, completion: completion)
+    }
+    
+    
     func presentFullScreen(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
         DispatchQueue.main.async {
             viewControllerToPresent.modalPresentationStyle = .fullScreen

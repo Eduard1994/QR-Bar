@@ -282,6 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				FF3921CA25F00832006DEED3 /* IAPManager.swift */,
+				FF51F5E625F471B900A1D945 /* StoreKit.swift */,
 				FFE4128A25F07BD30025662E /* PremiumTitle.swift */,
 			);
 			path = IAP;
@@ -515,7 +516,6 @@
 				FFA0F0E225E8CD4600C79D8C /* Switcher.swift */,
 				FF601C7F25EEDC950015DD22 /* Cache.swift */,
 				FF58971525F414AE00CEBE62 /* ErrorHandling.swift */,
-				FF51F5E625F471B900A1D945 /* StoreKit.swift */,
 				FF3921C925F00823006DEED3 /* IAP */,
 				FF8FE9C225E9849100E1DBD2 /* SnakePageControl */,
 				FF4BB46825EAB35500A461D4 /* SegmentedControl */,

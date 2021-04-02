@@ -172,7 +172,7 @@ class Service {
     
     func tabbedCodes(for tabs: [Tab.RawValue], userID: String, completion: @escaping ([TabbedCodes<Code>]) -> ()) {} // Will be updated soon
     
-//     MARK: - Adding price to Firebase // Will be added soon
+    // MARK: - Adding price to Firebase // Will be added soon
     func addPrice(for subscriptions: Subscriptions, completion: @escaping (([String : Any]?, NetworkError?) -> Void)) {
         if isConnectedToInternet {
             let post = [

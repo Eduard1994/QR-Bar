@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import StoreKit
+//import StoreKit
 import MessageUI
 
 class SettingsViewController: UIViewController {
@@ -26,9 +26,9 @@ class SettingsViewController: UIViewController {
         }
     }
     
-    var products: [SKProduct] = []
-    var store: IAPManager!
-    var subscriptions: Subscriptions = Subscriptions()
+//    var products: [SKProduct] = []
+//    var store: IAPManager!
+//    var subscriptions: Subscriptions = Subscriptions()
     let service = Service()
     
     // MARK: - Override properties
@@ -44,7 +44,17 @@ class SettingsViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        getSubscriptions()
+//        getSubscriptions()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("All Prices = \(allPrices)")
+        print("All Products = \(allProducts)")
+        print("All Product IDs = \(allProductIDs)")
+        print("Purchased = \(purchasedAny)")
+        
+        reloadViewIfUpgraded()
     }
     
     override func viewWillLayoutSubviews() {
@@ -82,65 +92,65 @@ class SettingsViewController: UIViewController {
         refresh()
     }
     
-    // MARK: - Requesting Premium Products
-    private func getSubscriptions() {
-        displayAnimatedActivityIndicatorView()
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.service.getSubscriptions() { (productIDs, error) in
-                DispatchQueue.main.async {
-                    if let error = error {
-                        self.hideAnimatedActivityIndicatorView()
-                        ErrorHandling.showError(message: error.localizedDescription, controller: self)
-                        return
-                    }
-                    if let productIDs = productIDs {
-                        self.hideAnimatedActivityIndicatorView()
-                        let store = IAPManager(productIDs: productIDs)
-                        self.store = store
-                        self.requestProducts(store: store, productIDs: productIDs)
-                        self.checkProducts(store: store, productIDs: productIDs)
-                    }
-                }
-            }
-        }
-    }
-    
-    private func checkProducts(store: IAPManager, productIDs: Set<ProductID>) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            if store.isProductPurchased(productIDs[productIDs.startIndex]) || store.isProductPurchased(productIDs[productIDs.index(productIDs.startIndex, offsetBy: 1)]) || store.isProductPurchased(productIDs[productIDs.index(productIDs.startIndex, offsetBy: 2)]) {
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: hideSettingsUpgradeNotification, object: nil)
-                    self.updateHeaderViewHeight(for: self.tableView.tableHeaderView)
-                    self.refresh()
-                }
-            } else {
-                // TODO
-            }
-        }
-    }
-    
-    private func requestProducts(store: IAPManager, productIDs: Set<ProductID>) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            store.requestProducts { [weak self](success, products) in
-                guard let self = self else { return }
-                guard success else {
-                    self.hideAnimatedActivityIndicatorView()
-                    DispatchQueue.main.async {
-                        self.alert(title: "Failed to load list of products", message: "Check logs for details", preferredStyle: .alert, actionTitle: "OK", actionHandler: nil)
-                    }
-                    return
-                }
-                DispatchQueue.main.async {
-                    self.hideAnimatedActivityIndicatorView()
-                    self.products = products!
-                    self.upgradeFromSettingsVC.products = products!
-                    self.upgradeFromSettingsVC.store = self.store
-                    self.upgradeFromSettingsVC.subscriptions = self.subscriptions
-                    self.checkProducts(store: store, productIDs: productIDs)
-                }
-            }
-        }
-    }
+//    // MARK: - Requesting Premium Products
+//    private func getSubscriptions() {
+//        displayAnimatedActivityIndicatorView()
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            self.service.getSubscriptions() { (productIDs, error) in
+//                DispatchQueue.main.async {
+//                    if let error = error {
+//                        self.hideAnimatedActivityIndicatorView()
+//                        ErrorHandling.showError(message: error.localizedDescription, controller: self)
+//                        return
+//                    }
+//                    if let productIDs = productIDs {
+//                        self.hideAnimatedActivityIndicatorView()
+//                        let store = IAPManager(productIDs: productIDs)
+//                        self.store = store
+//                        self.requestProducts(store: store, productIDs: productIDs)
+//                        self.checkProducts(store: store, productIDs: productIDs)
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    private func checkProducts(store: IAPManager, productIDs: Set<ProductID>) {
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            if store.isProductPurchased(productIDs[productIDs.startIndex]) || store.isProductPurchased(productIDs[productIDs.index(productIDs.startIndex, offsetBy: 1)]) || store.isProductPurchased(productIDs[productIDs.index(productIDs.startIndex, offsetBy: 2)]) {
+//                DispatchQueue.main.async {
+//                    NotificationCenter.default.post(name: hideSettingsUpgradeNotification, object: nil)
+//                    self.updateHeaderViewHeight(for: self.tableView.tableHeaderView)
+//                    self.refresh()
+//                }
+//            } else {
+//                // TODO
+//            }
+//        }
+//    }
+//
+//    private func requestProducts(store: IAPManager, productIDs: Set<ProductID>) {
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            store.requestProducts { [weak self](success, products) in
+//                guard let self = self else { return }
+//                guard success else {
+//                    self.hideAnimatedActivityIndicatorView()
+//                    DispatchQueue.main.async {
+//                        self.alert(title: "Failed to load list of products", message: "Check logs for details", preferredStyle: .alert, actionTitle: "OK", actionHandler: nil)
+//                    }
+//                    return
+//                }
+//                DispatchQueue.main.async {
+//                    self.hideAnimatedActivityIndicatorView()
+//                    self.products = products!
+//                    self.upgradeFromSettingsVC.products = products!
+//                    self.upgradeFromSettingsVC.store = self.store
+//                    self.upgradeFromSettingsVC.subscriptions = self.subscriptions
+//                    self.checkProducts(store: store, productIDs: productIDs)
+//                }
+//            }
+//        }
+//    }
     
     private func updateHeaderViewHeight(for header: UIView?) {
         guard let header = header else { return }
@@ -162,7 +172,7 @@ class SettingsViewController: UIViewController {
         }
     }
     
-    private func reloadCodes() {
+    private func reloadSettings() {
         settings = Settings.settings()
         
         DispatchQueue.main.after(1) {
@@ -170,17 +180,50 @@ class SettingsViewController: UIViewController {
         }
     }
     
-    private func restorePurchase() {
+    /// Reloading view after upgrading/restoring products
+    private func reloadViewIfUpgraded() {
+        if purchasedAny {
+            NotificationCenter.default.post(name: hideSettingsUpgradeNotification, object: nil)
+            self.updateHeaderViewHeight(for: self.tableView.tableHeaderView)
+            self.refresh()
+        }
+    }
+    
+//    private func restorePurchase() {
+//        displayAnimatedActivityIndicatorView()
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            self.store.restorePurchases { (succes, productID) in
+//                DispatchQueue.main.async {
+//                    guard succes else { return }
+//                    self.hideAnimatedActivityIndicatorView()
+//                    NotificationCenter.default.post(name: hideSettingsUpgradeNotification, object: nil)
+//                    self.updateHeaderViewHeight(for: self.tableView.tableHeaderView)
+//                    self.refresh()
+//                }
+//            }
+//        }
+//    }
+    
+    /// Trying to restore purchases
+    private func restorePurchases() {
         displayAnimatedActivityIndicatorView()
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.store.restorePurchases { (succes, productID) in
-                DispatchQueue.main.async {
-                    guard succes else { return }
-                    self.hideAnimatedActivityIndicatorView()
-                    NotificationCenter.default.post(name: hideSettingsUpgradeNotification, object: nil)
-                    self.updateHeaderViewHeight(for: self.tableView.tableHeaderView)
-                    self.refresh()
-                }
+        StoreKit.shared.restorePurchases { (results) in
+            StoreKit.shared.finishingRestoring(restoreResults: results)
+            if results.restoreFailedPurchases.count > 0 {
+                self.hideAnimatedActivityIndicatorView()
+                ErrorHandling.showError(title: "Restore Failed", message: "Please check Internet Connectivity and try again or Contact Support", controller: self)
+                print("Restore Failed: \(results.restoreFailedPurchases), Please contact support")
+            } else if results.restoredPurchases.count > 0 {
+                self.hideAnimatedActivityIndicatorView()
+                purchasedAny = true
+                self.alert(title: "Restored Successfully", message: nil, preferredStyle: .alert, cancelTitle: nil, cancelHandler: nil, actionTitle: "OK", actionHandler: {
+                    self.reloadViewIfUpgraded()
+                })
+                print("Restore Success: \(results.restoredPurchases), All purchases have been restored")
+            } else {
+                print("Nothing to Restore, No previous purchases were found")
+                self.hideAnimatedActivityIndicatorView()
+                ErrorHandling.showError(title: "Nothing to Restore", message: "No previous purchases were found", controller: self)
             }
         }
     }
@@ -211,14 +254,40 @@ class SettingsViewController: UIViewController {
         self.present(activityVC, animated: true, completion: nil)
     }
     
+    // MARK: - Presenting UpgradeFromSettingsVC
+    private func presentUpgradeFromSettingsVC(with productIDs: Set<ProductID>, allPrices: [String: String]) {
+        var annualPrice: String = "--"
+        var monthlyPrice: String = "--"
+        var weeklyPrice: String = "--"
+        for (title, price) in allPrices {
+            if title.contains("Monthly") {
+                monthlyPrice = price
+            } else if title.contains("Yearly") {
+                annualPrice = price
+            } else if title.contains("Weekly") {
+                weeklyPrice = price
+            }
+        }
+        upgradeFromSettingsVC.productIDs = productIDs
+        upgradeFromSettingsVC.monthlyPrice = monthlyPrice
+        upgradeFromSettingsVC.annualPrice = annualPrice
+        upgradeFromSettingsVC.weeklyPrice = weeklyPrice
+        
+        upgradeFromSettingsVC.delegate = self
+        if presentedViewController != upgradeFromSettingsVC {
+            self.presentOverFullScreen(upgradeFromSettingsVC, animated: true)
+        }
+    }
+    
     // MARK: - OBJC Functions
     @objc private func refresh() {
-        self.reloadCodes()
+        self.reloadSettings()
     }
     
     @objc private func notifiedToUpgrade() {
-        upgradeFromSettingsVC.modalPresentationStyle = .fullScreen
-        present(upgradeFromSettingsVC, animated: true, completion: nil)
+//        upgradeFromSettingsVC.modalPresentationStyle = .fullScreen
+//        present(upgradeFromSettingsVC, animated: true, completion: nil)
+        presentUpgradeFromSettingsVC(with: allProductIDs, allPrices: allPrices)
     }
     
     @objc private func notifiedToShowError() {
@@ -249,7 +318,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             print("Restoring...")
-            self.restorePurchase()
+            self.restorePurchases()
         case 1:
             self.contactUs()
         case 2:
@@ -268,5 +337,23 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 extension SettingsViewController: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
+    }
+}
+
+// MARK: - Dismiss From Upgrade Delegate
+extension SettingsViewController: UpgradeFromSettingsDelegate {
+    func purchased(purchases: [ProductID]) {
+        print(purchases)
+        print("Purchased")
+        print("All Prices = \(allPrices)")
+        print("All Products = \(allProducts)")
+        print("All Product IDs = \(allProductIDs)")
+        print("Purchased = \(purchasedAny)")
+        
+        reloadViewIfUpgraded()
+    }
+    
+    func dismissFromUpgrade() {
+        print("Dismissed")
     }
 }

@@ -41,6 +41,6 @@ class PrivacyViewController: UIViewController {
     // MARK: - IBActions
     @IBAction func acceptTapped(_ sender: Any) {
         UserDefaults.standard.set(true, forKey: kStatus)
-        Switcher.updateRootVC(showLaunch: false)
+        Switcher.shared.updateRootVC(showLaunch: false)
     }
 }

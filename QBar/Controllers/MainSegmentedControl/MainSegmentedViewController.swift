@@ -7,8 +7,10 @@
 
 import UIKit
 import FirebaseDatabase
-import StoreKit
-import SwiftyStoreKit
+//import StoreKit
+//import SwiftyStoreKit
+
+let setIndexNotification: Notification.Name = Notification.Name("SetIndexNotification")
 
 class MainSegmentedViewController: UIViewController {
 
@@ -41,9 +43,10 @@ class MainSegmentedViewController: UIViewController {
     
     var user: User!
     var service: Service!
-    var products: [SKProduct] = []
-    var store: IAPManager!
-    var subscriptions: Subscriptions!
+    var storeKit: StoreKit!
+//    var products: [SKProduct] = []
+//    var store: IAPManager!
+//    var subscriptions: Subscriptions!
     
     var cancelled = false
     
@@ -65,7 +68,8 @@ class MainSegmentedViewController: UIViewController {
     // MARK: - View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(notifiedToSetIndex), name: dismissNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(notifiedToSetIndex), name: setIndexNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(launchRemoved), name: launchRemovedNotification, object: nil)
         configureView()
     }
     
@@ -76,6 +80,7 @@ class MainSegmentedViewController: UIViewController {
     // MARK: - Functions
     private func configureView() {
         service = Service()
+        storeKit = StoreKit.shared
         
         let segmentsSize = CGSize(width: 18, height: 18)
         let images: [UIImage] = [UIImage(named: "recentsIcon")!, UIImage(named: "qrBarIcon")!, UIImage(named: "settingsIcon")!]
@@ -85,110 +90,115 @@ class MainSegmentedViewController: UIViewController {
         segmentedControl.setIndex(1)
         segmentedControl.addTarget(self, action: #selector(selectionDidChange(_:)), for: .valueChanged)
         
-        getSubscriptions()
+//        getSubscriptions()
         
         checkUser()
     }
     
-    private func presentOnboarding() {
+    private func presentOnboarding(with productIDs: Set<ProductID>) {
         if UserDefaults.standard.bool(forKey: kOnboardingStatus) != true {
-            onBoardingVC.modalPresentationStyle = .fullScreen
-            onBoardingVC.store = self.store
+//            onBoardingVC.modalPresentationStyle = .fullScreen
+            onBoardingVC.productIDs = productIDs
+            onBoardingVC.delegate = self
+//            onBoardingVC.store = self.store
             if presentedViewController != onBoardingVC {
-                self.present(onBoardingVC, animated: true) {
+//                presentedViewController?.removeFromParent()
+//                self.present(onBoardingVC, animated: true) {
+                self.presentOverFullScreen(onBoardingVC, animated: true) {
                     UserDefaults.standard.set(true, forKey: kOnboardingStatus)
                 }
+//                }
             }
         }
     }
     
-    private func getSubscriptions() {
-        displayAnimatedActivityIndicatorView()
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.service.getSubscriptions { (purchases, error) in
-                DispatchQueue.main.async {
-                    if let error = error {
-                        self.hideAnimatedActivityIndicatorView()
-                        ErrorHandling.showError(message: error.localizedDescription, controller: self)
-                        return
-                    }
-                    if let purchases = purchases {
-                        self.hideAnimatedActivityIndicatorView()
-                        let store = IAPManager(productIDs: purchases)
-                        self.store = store
-                        self.requestProducts(store: store, productIDs: purchases)
-                        self.checkProducts(store: store, productIDs: purchases)
-                    }
-                }
-            }
-        }
-    }
-    
-    private func checkProducts(store: IAPManager, productIDs: Set<ProductID>) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            if store.isProductPurchased(productIDs[productIDs.startIndex]) || store.isProductPurchased(productIDs[productIDs.index(productIDs.startIndex, offsetBy: 1)]) || store.isProductPurchased(productIDs[productIDs.index(productIDs.startIndex, offsetBy: 2)]){
-                DispatchQueue.main.async {
-                    self.segmentedControl.setIndex(0)
-                    self.updateView()
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.segmentedControl.setIndex(1)
-                    self.presentOnboarding()
-                    self.updateView()
-                }
-            }
-        }
-    }
-    
-    private func requestProducts(store: IAPManager, productIDs: Set<ProductID>) {
-        displayAnimatedActivityIndicatorView()
-        DispatchQueue.global(qos: .userInitiated).async {
-            store.requestProducts { [weak self](success, products) in
-                guard let self = self else { return }
-                guard success else {
-                    self.hideAnimatedActivityIndicatorView()
-                    DispatchQueue.main.async {
-                        self.alert(title: "Failed to load list of products", message: "Check logs for details", preferredStyle: .alert, actionTitle: "OK")
-                    }
-                    return
-                }
-                if let products = products {
-                    DispatchQueue.main.async {
-                        self.addPrice(from: products)
-                        self.hideAnimatedActivityIndicatorView()
-                        print(products as Any)
-                        self.products = products
-                        self.onBoardingVC.products = products
-                        print("Product ids are = \(productIDs)")
-                        self.checkProducts(store: store, productIDs: productIDs)
-                    }
-                }
-            }
-        }
-    }
-    
-    private func addPrice(from products: [SKProduct]) {
-        let annualProductID = products[2].productIdentifier
-        let annualProductPrice = products[2].price.floatValue
-        let monthlyProductID = products[0].productIdentifier
-        let monthlyProductPrice = products[0].price.floatValue
-        let weeklyProductID = products[1].productIdentifier
-        let weeklyProductPrice = products[1].price.floatValue
-        let subscriptions = Subscriptions(annualProductID: annualProductID, annualProductPrice: Double(annualProductPrice).rounded(toPlaces: 2), monthlyProductID: monthlyProductID, monthlyProductPrice: Double(monthlyProductPrice).rounded(toPlaces: 2), weeklyProductID: weeklyProductID, weeklyProductPrice: Double(weeklyProductPrice).rounded(toPlaces: 2))
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.service.addPrice(for: subscriptions) { (childUpdates, error) in
-                DispatchQueue.main.async {
-                    if error == nil {
-                        print("Succeeded")
-                        self.onBoardingVC.subscriptions = subscriptions
-                        self.recentsVC.subscriptions = subscriptions
-                        self.settingsVC.subscriptions = subscriptions
-                    }
-                }
-            }
-        }
-    }
+//    private func getSubscriptions() {
+//        displayAnimatedActivityIndicatorView()
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            self.service.getSubscriptions { (purchases, error) in
+//                DispatchQueue.main.async {
+//                    if let error = error {
+//                        self.hideAnimatedActivityIndicatorView()
+//                        ErrorHandling.showError(message: error.localizedDescription, controller: self)
+//                        return
+//                    }
+//                    if let purchases = purchases {
+//                        self.hideAnimatedActivityIndicatorView()
+//                        let store = IAPManager(productIDs: purchases)
+//                        self.store = store
+//                        self.requestProducts(store: store, productIDs: purchases)
+//                        self.checkProducts(store: store, productIDs: purchases)
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    private func checkProducts(store: IAPManager, productIDs: Set<ProductID>) {
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            if store.isProductPurchased(productIDs[productIDs.startIndex]) || store.isProductPurchased(productIDs[productIDs.index(productIDs.startIndex, offsetBy: 1)]) || store.isProductPurchased(productIDs[productIDs.index(productIDs.startIndex, offsetBy: 2)]){
+//                DispatchQueue.main.async {
+//                    self.segmentedControl.setIndex(0)
+//                    self.updateView()
+//                }
+//            } else {
+//                DispatchQueue.main.async {
+//                    self.segmentedControl.setIndex(1)
+//                    self.presentOnboarding()
+//                    self.updateView()
+//                }
+//            }
+//        }
+//    }
+//
+//    private func requestProducts(store: IAPManager, productIDs: Set<ProductID>) {
+//        displayAnimatedActivityIndicatorView()
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            store.requestProducts { [weak self](success, products) in
+//                guard let self = self else { return }
+//                guard success else {
+//                    self.hideAnimatedActivityIndicatorView()
+//                    DispatchQueue.main.async {
+//                        self.alert(title: "Failed to load list of products", message: "Check logs for details", preferredStyle: .alert, actionTitle: "OK")
+//                    }
+//                    return
+//                }
+//                if let products = products {
+//                    DispatchQueue.main.async {
+//                        self.addPrice(from: products)
+//                        self.hideAnimatedActivityIndicatorView()
+//                        print(products as Any)
+//                        self.products = products
+//                        self.onBoardingVC.products = products
+//                        print("Product ids are = \(productIDs)")
+//                        self.checkProducts(store: store, productIDs: productIDs)
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    private func addPrice(from products: [SKProduct]) {
+//        let annualProductID = products[2].productIdentifier
+//        let annualProductPrice = products[2].price.floatValue
+//        let monthlyProductID = products[0].productIdentifier
+//        let monthlyProductPrice = products[0].price.floatValue
+//        let weeklyProductID = products[1].productIdentifier
+//        let weeklyProductPrice = products[1].price.floatValue
+//        let subscriptions = Subscriptions(annualProductID: annualProductID, annualProductPrice: Double(annualProductPrice).rounded(toPlaces: 2), monthlyProductID: monthlyProductID, monthlyProductPrice: Double(monthlyProductPrice).rounded(toPlaces: 2), weeklyProductID: weeklyProductID, weeklyProductPrice: Double(weeklyProductPrice).rounded(toPlaces: 2))
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            self.service.addPrice(for: subscriptions) { (childUpdates, error) in
+//                DispatchQueue.main.async {
+//                    if error == nil {
+//                        print("Succeeded")
+//                        self.onBoardingVC.subscriptions = subscriptions
+//                        self.recentsVC.subscriptions = subscriptions
+//                        self.settingsVC.subscriptions = subscriptions
+//                    }
+//                }
+//            }
+//        }
+//    }
     
     private func checkUser() {
         service.checkUser { (user, error) in
@@ -257,6 +267,19 @@ class MainSegmentedViewController: UIViewController {
     }
     
     // MARK: - OBJC Functions
+    @objc func launchRemoved() {
+        print("All Prices = \(allPrices)")
+        print("All Products = \(allProducts)")
+        print("All Product IDs = \(allProductIDs)")
+        print("Purchased = \(purchasedAny)")
+        
+        notifiedToSetIndex()
+        
+        if !purchasedAny {//&& service.isConnectedToInternet {
+            self.presentOnboarding(with: allProductIDs)
+        }
+    }
+    
     @objc private func notifiedToSetIndex() {
         segmentedControl.setIndex(1)
         self.updateView()
@@ -303,3 +326,15 @@ extension MainSegmentedViewController: QRBarcodeScannerDismissalDelegate {
     }
 }
 
+// MARK: - Upgrade From Onboarding Delegate {
+extension MainSegmentedViewController: UpgradeFromOnboardingDelegate {
+    func dismissFromUpgrade() {
+        print("Dismissed")
+        segmentedControl.setIndex(1)
+        self.updateView()
+    }
+    
+    func purchased(purchases: [ProductID]) {
+        print(purchases)
+    }
+}

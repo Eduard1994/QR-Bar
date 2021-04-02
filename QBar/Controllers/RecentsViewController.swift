@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import StoreKit
+//import StoreKit
 
 class RecentsViewController: UIViewController {
 
@@ -45,9 +45,9 @@ class RecentsViewController: UIViewController {
     
     var user: User!
     var service: Service!
-    var store: IAPManager!
-    var products: [SKProduct] = []
-    var subscriptions: Subscriptions = Subscriptions()
+//    var store: IAPManager!
+//    var products: [SKProduct] = []
+//    var subscriptions: Subscriptions = Subscriptions()
     
     // MARK: - Override properties
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -68,7 +68,20 @@ class RecentsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 //        requestProducts()
-        getSubscriptions()
+//        getSubscriptions()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("Will appear")
+        print("All Prices = \(allPrices)")
+        print("All Products = \(allProducts)")
+        print("All Product IDs = \(allProductIDs)")
+        print("Purchased = \(purchasedAny)")
+        
+        if !purchasedAny {
+            self.presentUpgradeToPremium(with: allProductIDs)
+        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -109,13 +122,15 @@ class RecentsViewController: UIViewController {
         }
     }
     // MARK - Presenting Upgrade VC
-    private func presentUpgradeVC() {
-        upgradeToPremiumVC.modalPresentationStyle = .fullScreen
-        upgradeToPremiumVC.products = self.products
-        upgradeToPremiumVC.subscriptions = self.subscriptions
-        upgradeToPremiumVC.store = self.store
+    private func presentUpgradeToPremium(with productIDs: Set<ProductID>) {
+//        upgradeToPremiumVC.modalPresentationStyle = .fullScreen
+//        upgradeToPremiumVC.products = self.products
+//        upgradeToPremiumVC.subscriptions = self.subscriptions
+//        upgradeToPremiumVC.store = self.store
+        upgradeToPremiumVC.productIDs = productIDs
+        upgradeToPremiumVC.delegate = self
         if presentedViewController != upgradeToPremiumVC {
-            present(upgradeToPremiumVC, animated: true, completion: nil)
+            self.presentOverFullScreen(upgradeToPremiumVC, animated: true)
         }
     }
     
@@ -127,63 +142,63 @@ class RecentsViewController: UIViewController {
         present(vc, animated: true, completion: nil)
     }
     
-    // MARK: - Requesting Premium Products
-    private func getSubscriptions() {
-        displayAnimatedActivityIndicatorView()
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.service.getSubscriptions() { (productIDs, error) in
-                DispatchQueue.main.async {
-                    if let error = error {
-                        self.hideAnimatedActivityIndicatorView()
-                        ErrorHandling.showError(message: error.localizedDescription, controller: self)
-                        return
-                    }
-                    if let productIDs = productIDs {
-                        self.hideAnimatedActivityIndicatorView()
-                        let store = IAPManager(productIDs: productIDs)
-                        self.store = store
-                        self.requestProducts(store: store, productIDs: productIDs)
-                        self.checkProducts(store: store, productIDs: productIDs)
-                    }
-                }
-            }
-        }
-    }
-    
-    private func checkProducts(store: IAPManager, productIDs: Set<ProductID>) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            if store.isProductPurchased(productIDs[productIDs.startIndex]) || store.isProductPurchased(productIDs[productIDs.index(productIDs.startIndex, offsetBy: 1)]) || store.isProductPurchased(productIDs[productIDs.index(productIDs.startIndex, offsetBy: 2)]) {
-            } else {
-                DispatchQueue.main.async {
-                    self.presentUpgradeVC()
-                }
-            }
-        }
-    }
-    
-    private func requestProducts(store: IAPManager, productIDs: Set<ProductID>) {
-        displayAnimatedActivityIndicatorView()
-        DispatchQueue.global(qos: .userInitiated).async {
-            store.requestProducts { [weak self](success, products) in
-                guard let self = self else { return }
-                guard success else {
-                    self.hideAnimatedActivityIndicatorView()
-                    DispatchQueue.main.async {
-                        let ac = UIAlertController(title: "Failed to load list of products", message: "Check logs for details", preferredStyle: .alert)
-                        ac.addAction(UIAlertAction(title: "OK", style: .default))
-                        self.present(ac, animated: true, completion: nil)
-                        
-                    }
-                    return
-                }
-                DispatchQueue.main.async {
-                    self.hideAnimatedActivityIndicatorView()
-                    self.products = products!
-                    self.checkProducts(store: store, productIDs: productIDs)
-                }
-            }
-        }
-    }
+//    // MARK: - Requesting Premium Products
+//    private func getSubscriptions() {
+//        displayAnimatedActivityIndicatorView()
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            self.service.getSubscriptions() { (productIDs, error) in
+//                DispatchQueue.main.async {
+//                    if let error = error {
+//                        self.hideAnimatedActivityIndicatorView()
+//                        ErrorHandling.showError(message: error.localizedDescription, controller: self)
+//                        return
+//                    }
+//                    if let productIDs = productIDs {
+//                        self.hideAnimatedActivityIndicatorView()
+//                        let store = IAPManager(productIDs: productIDs)
+//                        self.store = store
+//                        self.requestProducts(store: store, productIDs: productIDs)
+//                        self.checkProducts(store: store, productIDs: productIDs)
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    private func checkProducts(store: IAPManager, productIDs: Set<ProductID>) {
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            if store.isProductPurchased(productIDs[productIDs.startIndex]) || store.isProductPurchased(productIDs[productIDs.index(productIDs.startIndex, offsetBy: 1)]) || store.isProductPurchased(productIDs[productIDs.index(productIDs.startIndex, offsetBy: 2)]) {
+//            } else {
+//                DispatchQueue.main.async {
+//                    self.presentUpgradeVC()
+//                }
+//            }
+//        }
+//    }
+//
+//    private func requestProducts(store: IAPManager, productIDs: Set<ProductID>) {
+//        displayAnimatedActivityIndicatorView()
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            store.requestProducts { [weak self](success, products) in
+//                guard let self = self else { return }
+//                guard success else {
+//                    self.hideAnimatedActivityIndicatorView()
+//                    DispatchQueue.main.async {
+//                        let ac = UIAlertController(title: "Failed to load list of products", message: "Check logs for details", preferredStyle: .alert)
+//                        ac.addAction(UIAlertAction(title: "OK", style: .default))
+//                        self.present(ac, animated: true, completion: nil)
+//
+//                    }
+//                    return
+//                }
+//                DispatchQueue.main.async {
+//                    self.hideAnimatedActivityIndicatorView()
+//                    self.products = products!
+//                    self.checkProducts(store: store, productIDs: productIDs)
+//                }
+//            }
+//        }
+//    }
     
     private func updateHeaderViewHeight(for header: UIView?) {
         guard let header = header else { return }
@@ -398,5 +413,25 @@ extension RecentsViewController: UITableViewDelegate, UITableViewDataSource {
 extension RecentsViewController: TabDelegate {
     func didChoose(tab: Tab) {
         self.tab = tab
+    }
+}
+
+// MARK: - Dismiss From Upgrade Delegate
+extension RecentsViewController: UpgradeFromRecentsDelegate {
+    func purchased(purchases: [ProductID]) {
+        print(purchases)
+        print("Purchased")
+        print("All Prices = \(allPrices)")
+        print("All Products = \(allProducts)")
+        print("All Product IDs = \(allProductIDs)")
+        print("Purchased = \(purchasedAny)")
+    }
+    
+    func dismissFromUpgrade() {
+        print("Dismissed")
+        print("Should select index 1 in mainsegmented control")
+        if !purchasedAny {
+            NotificationCenter.default.post(name: setIndexNotification, object: nil)
+        }
     }
 }
