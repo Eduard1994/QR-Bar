@@ -134,7 +134,7 @@ class Switcher: NSObject {
                 for product in products {
                     if let priceString = product.localizedPrice {
                         allPrices[product.localizedTitle] = priceString
-                        print("\(product.localizedTitle)", "\(product.localizedDescription) - \(priceString)")
+                        print("\(product.localizedTitle), \(product.localizedDescription) - \(priceString)")
                     }
                 }
             } else if let invalidProductIds = result?.invalidProductIDs {

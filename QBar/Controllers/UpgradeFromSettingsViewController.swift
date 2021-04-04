@@ -98,7 +98,7 @@ class UpgradeFromSettingsViewController: UIViewController {
         self.enjoyLabel.text = subscribe.secondTitle
         self.annualLabel1.text = subscribe.annualFirstTitle
 //        self.annualLabel2.text = "\(subscribe.annualSecondTitle) $\(subscriptions.annualProductPrice)/year"
-        self.annualLabel1.text = "\(subscribe.annualSecondTitle) \(annualPrice)/year"
+        self.annualLabel2.text = "\(subscribe.annualSecondTitle) \(annualPrice)/year"
         self.monthlyLabel1.text = subscribe.monthlyFirstTitle
 //        self.monthlyLabel2.text = "\(subscribe.monthlySecondTitle) $\(subscriptions.monthlyProductPrice)/month"
         self.monthlyLabel2.text = "\(subscribe.monthlySecondTitle) \(monthlyPrice)/month"
