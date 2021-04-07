@@ -171,12 +171,13 @@ class OnboardingViewController: UIViewController {
             for (title, price) in allPrices {
                 if title.contains("Monthly") {
                     slide.thenLabel.text = "\(onboarding.fourthTitle) \(price) a month"
-                    slide.startMonthlySecondButton.setTitle("\(price) \(onboarding.startMonthlySecondTitle)", for: UIControl.State())
+                } else if title.contains("Yearly") {
+                    slide.startYearlySecondButton.setTitle("\(price) \(onboarding.startYearlySecondTitle)", for: UIControl.State())
                 }
             }
         } else {
             slide.thenLabel.text = "\(onboarding.fourthTitle) -- a month"
-            slide.startMonthlySecondButton.setTitle("-- \(onboarding.startMonthlySecondTitle)", for: UIControl.State())
+            slide.startYearlySecondButton.setTitle("-- \(onboarding.startYearlySecondTitle)", for: UIControl.State())
         }
         
         slide.closeButton.isHidden = !onboarding.closeButton
@@ -186,7 +187,7 @@ class OnboardingViewController: UIViewController {
         slide.startFreeLabel.text = onboarding.thirdTitle
         slide.proceedWithBasicButton.setTitle(onboarding.basicTitle, for: UIControl.State())
         slide.tryFreeButton.setTitle(onboarding.tryFreeTitle, for: UIControl.State())
-        slide.startMonthlyButton.setTitle(onboarding.startMonthlyFirstTitle, for: UIControl.State())
+        slide.startYearlyButton.setTitle(onboarding.startYearlyFirstTitle, for: UIControl.State())
         slide.privacyEulaLabel.text = onboarding.privacyEulaTitle
     }
     

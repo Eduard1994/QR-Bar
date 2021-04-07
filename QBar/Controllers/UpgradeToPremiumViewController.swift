@@ -23,8 +23,10 @@ class UpgradeToPremiumViewController: UIViewController {
     @IBOutlet weak var proceedWithBasicButton: UIButton!
     @IBOutlet weak var tryFreeButton: UIButton!
     @IBOutlet weak var startMonthlyView: UIView!
-    @IBOutlet weak var startMonthlyButton: UIButton!
-    @IBOutlet weak var priceAMonthButton: UIButton!
+//    @IBOutlet weak var startMonthlyButton: UIButton!
+//    @IBOutlet weak var priceAMonthButton: UIButton!
+    @IBOutlet weak var startYearlyButton: UIButton!
+    @IBOutlet weak var priceAYearButton: UIButton!
     @IBOutlet weak var trialLabel: UILabel!
     @IBOutlet weak var privacyButton: UIButton!
     @IBOutlet weak var eulaButton: UIButton!
@@ -88,12 +90,13 @@ class UpgradeToPremiumViewController: UIViewController {
             for (title, price) in allPrices {
                 if title.contains("Monthly") {
                     self.thenLabel.text = "\(onboarding.fourthTitle) \(price) a month"
-                    self.priceAMonthButton.setTitle("\(price) \(onboarding.startMonthlySecondTitle)", for: UIControl.State())
+                } else if title.contains("Yearly") {
+                    self.priceAYearButton.setTitle("\(price) \(onboarding.startYearlySecondTitle)", for: UIControl.State())
                 }
             }
         } else {
             self.thenLabel.text = "\(onboarding.fourthTitle) -- a month"
-            self.priceAMonthButton.setTitle("-- \(onboarding.startMonthlySecondTitle)", for: UIControl.State())
+            self.priceAYearButton.setTitle("-- \(onboarding.startYearlySecondTitle)", for: UIControl.State())
         }
         
         self.closeButton.isHidden = !onboarding.closeButton
@@ -103,7 +106,7 @@ class UpgradeToPremiumViewController: UIViewController {
         self.startFreeLabel.text = onboarding.thirdTitle
         self.proceedWithBasicButton.setTitle(onboarding.basicTitle, for: UIControl.State())
         self.tryFreeButton.setTitle(onboarding.tryFreeTitle, for: UIControl.State())
-        self.startMonthlyButton.setTitle(onboarding.startMonthlyFirstTitle, for: UIControl.State())
+        self.startYearlyButton.setTitle(onboarding.startYearlyFirstTitle, for: UIControl.State())
         self.trialLabel.text = onboarding.privacyEulaTitle
     }
     
@@ -188,6 +191,19 @@ class UpgradeToPremiumViewController: UIViewController {
         print("Try free tapped")
         if service.isConnectedToInternet {
             for productID in productIDs {
+                if productID.contains("month") {
+                    purchaseItem(productID: productID)
+                }
+            }
+        } else {
+            ErrorHandling.showError(message: "Check Internet Connection and try again.", controller: self)
+        }
+    }
+    
+    @IBAction func startYearlyTapped(_ sender: Any) {
+        print("Start Yearly Tapped")
+        if service.isConnectedToInternet {
+            for productID in productIDs {
                 if productID.contains("year") {
                     purchaseItem(productID: productID)
                 }
@@ -200,15 +216,6 @@ class UpgradeToPremiumViewController: UIViewController {
     @IBAction func startMonthlyTapped(_ sender: Any) {
 //        purchase(index: 0)
         print("Start Monthly Tapped")
-        if service.isConnectedToInternet {
-            for productID in productIDs {
-                if productID.contains("month") {
-                    purchaseItem(productID: productID)
-                }
-            }
-        } else {
-            ErrorHandling.showError(message: "Check Internet Connection and try again.", controller: self)
-        }
     }
     
     @IBAction func closeButtonTapped(_ sender: Any) {

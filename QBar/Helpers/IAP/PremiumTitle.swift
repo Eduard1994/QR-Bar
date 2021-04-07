@@ -25,11 +25,11 @@ struct OnboardingTitle {
     var fourthTitle: String
     var basicTitle: String
     var tryFreeTitle: String
-    var startMonthlyFirstTitle: String
-    var startMonthlySecondTitle: String
+    var startYearlyFirstTitle: String
+    var startYearlySecondTitle: String
     var privacyEulaTitle: String
     
-    init(closeButton: Bool = false, firstTitle: String = "Upgrade to premium", secondTitle: String = "Enjoy full version of app without ads", thirdTitle: String = "Start your 3-day free trial.", fourthTitle: String = "Then $99.99 a month", basicTitle: String = "Proceed with Basic", tryFreeTitle: String = "Try Free and subscribe", startMonthlyFirstTitle: String = "Start Monthly Plan", startMonthlySecondTitle: String = "$99.99 a month", privacyEulaTitle: String = "This trial automatically renews into a paidsubscribtion and will continue to automatically renew until you cancel. Please see our") {
+    init(closeButton: Bool = false, firstTitle: String = "Upgrade to premium", secondTitle: String = "Enjoy full version of app without ads", thirdTitle: String = "Start your 3-day free trial.", fourthTitle: String = "Then -- a month", basicTitle: String = "Proceed with Basic", tryFreeTitle: String = "Try Free and subscribe", startYearlyFirstTitle: String = "Start Yearly Plan", startYearlySecondTitle: String = "-- a year", privacyEulaTitle: String = "This trial automatically renews into a paidsubscribtion and will continue to automatically renew until you cancel. Please see our") {
         self.ref = nil
         self.key = nil
         self.closeButton = closeButton
@@ -39,8 +39,8 @@ struct OnboardingTitle {
         self.fourthTitle = fourthTitle
         self.basicTitle = basicTitle
         self.tryFreeTitle = tryFreeTitle
-        self.startMonthlyFirstTitle = startMonthlyFirstTitle
-        self.startMonthlySecondTitle = startMonthlySecondTitle
+        self.startYearlyFirstTitle = startYearlyFirstTitle
+        self.startYearlySecondTitle = startYearlySecondTitle
         self.privacyEulaTitle = privacyEulaTitle
     }
     
@@ -55,8 +55,8 @@ struct OnboardingTitle {
             let fourthTitle = value["fourthTitle"] as? String,
             let basicTitle = value["basicTitle"] as? String,
             let tryFreeTitle = value["tryFreeTitle"] as? String,
-            let startMonthlyFirstTitle = value["startMonthlyFirstTitle"] as? String,
-            let startMonthlySecondTitle = value["startMonthlySecondTitle"] as? String,
+            let startYearlyFirstTitle = value["startYearlyFirstTitle"] as? String,
+            let startYearlySecondTitle = value["startYearlySecondTitle"] as? String,
             let privacyEulaTitle = value["privacyEulaTitle"] as? String
         else {
             return nil
@@ -72,8 +72,8 @@ struct OnboardingTitle {
         self.fourthTitle = fourthTitle
         self.basicTitle = basicTitle
         self.tryFreeTitle = tryFreeTitle
-        self.startMonthlyFirstTitle = startMonthlyFirstTitle
-        self.startMonthlySecondTitle = startMonthlySecondTitle
+        self.startYearlyFirstTitle = startYearlyFirstTitle
+        self.startYearlySecondTitle = startYearlySecondTitle
         self.privacyEulaTitle = privacyEulaTitle
     }
     
@@ -86,8 +86,8 @@ struct OnboardingTitle {
             "fourthTitle": fourthTitle,
             "basicTitle": basicTitle,
             "tryFreeTitle": tryFreeTitle,
-            "startMonthlyFirstTitle": startMonthlyFirstTitle,
-            "startMonthlySecondTitle": startMonthlySecondTitle,
+            "startYearlyFirstTitle": startYearlyFirstTitle,
+            "startYearlySecondTitle": startYearlySecondTitle,
             "privacyEulaTitle": privacyEulaTitle
         ]
     }

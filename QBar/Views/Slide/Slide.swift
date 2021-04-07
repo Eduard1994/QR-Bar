@@ -28,8 +28,10 @@ class Slide: UIView {
     
     @IBOutlet weak var tryFreeButton: UIButton!
     @IBOutlet weak var startMonthlyView: UIView!
-    @IBOutlet weak var startMonthlyButton: UIButton!
-    @IBOutlet weak var startMonthlySecondButton: UIButton!
+//    @IBOutlet weak var startMonthlyButton: UIButton!
+//    @IBOutlet weak var startMonthlySecondButton: UIButton!
+    @IBOutlet weak var startYearlyButton: UIButton!
+    @IBOutlet weak var startYearlySecondButton: UIButton!
     @IBOutlet weak var eulaStackView: UIStackView!
     @IBOutlet weak var privacyEulaLabel: UILabel!
     @IBOutlet weak var privacyPolicyButton: UIButton!
@@ -91,8 +93,8 @@ class Slide: UIView {
         slide1.proceedWithBasicButton.isEnabled = false
         slide1.tryFreeButton.isHidden = true
         slide1.tryFreeButton.isEnabled = false
-        slide1.startMonthlyButton.isEnabled = false
-        slide1.startMonthlySecondButton.isEnabled = false
+        slide1.startYearlyButton.isEnabled = false
+        slide1.startYearlySecondButton.isEnabled = false
         slide1.startMonthlyView.isHidden = true
         slide1.eulaStackView.isHidden = true
         slide1.privacyPolicyButton.isEnabled = false
@@ -134,8 +136,8 @@ class Slide: UIView {
         slide2.proceedWithBasicButton.isEnabled = false
         slide2.tryFreeButton.isHidden = true
         slide2.tryFreeButton.isEnabled = false
-        slide2.startMonthlyButton.isEnabled = false
-        slide2.startMonthlySecondButton.isEnabled = false
+        slide2.startYearlyButton.isEnabled = false
+        slide2.startYearlySecondButton.isEnabled = false
         slide2.startMonthlyView.isHidden = true
         slide2.eulaStackView.isHidden = true
         slide2.privacyPolicyButton.isEnabled = false
@@ -183,8 +185,8 @@ class Slide: UIView {
         slide3.tryFreeButton.cornerRadius(to: 20)
         slide3.startMonthlyView.cornerRadius(to: 20)
         slide3.startMonthlyView.addBorder(width: 2.0, color: .mainBlack)
-        slide3.startMonthlyButton.isEnabled = true
-        slide3.startMonthlySecondButton.isEnabled = true
+        slide3.startYearlyButton.isEnabled = true
+        slide3.startYearlySecondButton.isEnabled = true
         slide3.startMonthlyView.isHidden = false
         slide3.eulaStackView.isHidden = false
         slide3.privacyPolicyButton.isEnabled = true
@@ -208,14 +210,18 @@ class Slide: UIView {
     
     @IBAction func tryFreeTapped(_ sender: Any) {
         print("Try free tapped")
+        let userInfo = ["index": 0]
+        NotificationCenter.default.post(name: subTypeNotificationIndex, object: nil, userInfo: userInfo)
+    }
+    
+    @IBAction func startYearlyTapped(_ sender: Any) {
+        print("Start Yearly tapped")
         let userInfo = ["index": 2]
         NotificationCenter.default.post(name: subTypeNotificationIndex, object: nil, userInfo: userInfo)
     }
     
     @IBAction func startMonthlyTapped(_ sender: Any) {
         print("StartMonthly tapped")
-        let userInfo = ["index": 0]
-        NotificationCenter.default.post(name: subTypeNotificationIndex, object: nil, userInfo: userInfo)
     }
     
     @IBAction func privacyPolicyTapped(_ sender: Any) {

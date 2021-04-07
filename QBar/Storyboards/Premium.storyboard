@@ -56,40 +56,29 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="u5R-Oy-aGk">
                                 <rect key="frame" x="47" y="432" width="281" height="144"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YPe-6K-2zW">
-                                        <rect key="frame" x="0.0" y="0.0" width="281" height="64"/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="17"/>
-                                        <state key="normal" title="Try Free and subscribe">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="tryFreeTapped:" destination="ULo-ah-6GT" eventType="touchUpInside" id="oAl-w9-mvM"/>
-                                        </connections>
-                                    </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aeQ-Yu-Rah">
-                                        <rect key="frame" x="0.0" y="80" width="281" height="64"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="281" height="64"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DxT-Dz-gcy">
-                                                <rect key="frame" x="71.5" y="8" width="138" height="24"/>
+                                                <rect key="frame" x="79" y="8" width="123" height="24"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="17"/>
-                                                <state key="normal" title="Start Monthly Plan">
+                                                <state key="normal" title="Start Yearly Plan">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="startMonthlyTapped:" destination="ULo-ah-6GT" eventType="touchUpInside" id="UPZ-ik-Ssa"/>
+                                                    <action selector="startYearlyTapped:" destination="ULo-ah-6GT" eventType="touchUpInside" id="PzS-XS-Gcg"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hFZ-Pf-V9i">
-                                                <rect key="frame" x="109" y="32" width="63" height="24"/>
+                                                <rect key="frame" x="115.5" y="32" width="50" height="24"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
-                                                <state key="normal" title="-- a month">
+                                                <state key="normal" title="-- a year">
                                                     <color key="titleColor" red="0.52549019607843139" green="0.52549019607843139" blue="0.52549019607843139" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="startMonthlyTapped:" destination="ULo-ah-6GT" eventType="touchUpInside" id="e4b-UW-aHa"/>
+                                                    <action selector="startYearlyTapped:" destination="ULo-ah-6GT" eventType="touchUpInside" id="pcq-di-5Rp"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -103,6 +92,17 @@
                                             <constraint firstItem="DxT-Dz-gcy" firstAttribute="top" secondItem="aeQ-Yu-Rah" secondAttribute="top" constant="8" id="zg4-gF-gs8"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YPe-6K-2zW">
+                                        <rect key="frame" x="0.0" y="80" width="281" height="64"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="17"/>
+                                        <state key="normal" title="Try Free and subscribe">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="tryFreeTapped:" destination="ULo-ah-6GT" eventType="touchUpInside" id="oAl-w9-mvM"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="144" id="mgF-Qx-ByO"/>
@@ -211,12 +211,12 @@
                         <outlet property="closeButton" destination="JLL-S3-FIY" id="um0-3R-Vca"/>
                         <outlet property="enjoyLabel" destination="H4w-Ak-lQo" id="sLC-17-PHU"/>
                         <outlet property="eulaButton" destination="f1Z-cj-xCv" id="q99-1j-69f"/>
-                        <outlet property="priceAMonthButton" destination="hFZ-Pf-V9i" id="uSI-N5-aXr"/>
+                        <outlet property="priceAYearButton" destination="hFZ-Pf-V9i" id="Kar-4S-YhP"/>
                         <outlet property="privacyButton" destination="NL5-qe-UCB" id="Psn-Mc-MhB"/>
                         <outlet property="proceedWithBasicButton" destination="e1q-Fn-Fng" id="ITT-2X-3Q5"/>
                         <outlet property="startFreeLabel" destination="OhC-vz-IPI" id="Kvj-Ch-kTy"/>
-                        <outlet property="startMonthlyButton" destination="DxT-Dz-gcy" id="b6i-VC-p4g"/>
                         <outlet property="startMonthlyView" destination="aeQ-Yu-Rah" id="6lB-1t-dMR"/>
+                        <outlet property="startYearlyButton" destination="DxT-Dz-gcy" id="xGX-Zb-tOB"/>
                         <outlet property="thenLabel" destination="aQH-rH-PLt" id="7Dh-fr-B45"/>
                         <outlet property="trialLabel" destination="HgR-my-H7P" id="FOU-8Z-ldH"/>
                         <outlet property="tryFreeButton" destination="YPe-6K-2zW" id="v6v-lu-tpy"/>
