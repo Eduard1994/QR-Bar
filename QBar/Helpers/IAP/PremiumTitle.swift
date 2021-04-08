@@ -29,7 +29,7 @@ struct OnboardingTitle {
     var startYearlySecondTitle: String
     var privacyEulaTitle: String
     
-    init(closeButton: Bool = false, firstTitle: String = "Upgrade to premium", secondTitle: String = "Enjoy full version of app without ads", thirdTitle: String = "Start your 3-day free trial.", fourthTitle: String = "Then -- a month", basicTitle: String = "Proceed with Basic", tryFreeTitle: String = "Try Free and subscribe", startYearlyFirstTitle: String = "Start Yearly Plan", startYearlySecondTitle: String = "-- a year", privacyEulaTitle: String = "This trial automatically renews into a paidsubscribtion and will continue to automatically renew until you cancel. Please see our") {
+    init(closeButton: Bool = false, firstTitle: String = "Upgrade to premium", secondTitle: String = "Enjoy full version of app without ads", thirdTitle: String = "Start your 3-day free trial.", fourthTitle: String = "Then", basicTitle: String = "Proceed with Basic", tryFreeTitle: String = "Try Free and subscribe", startYearlyFirstTitle: String = "Start Yearly Plan", startYearlySecondTitle: String = "a year", privacyEulaTitle: String = "This trial automatically renews into a paidsubscribtion and will continue to automatically renew until you cancel. Please see our") {
         self.ref = nil
         self.key = nil
         self.closeButton = closeButton
@@ -107,7 +107,7 @@ struct SubscribeTitle {
     var weeklyFirstTitle: String
     var weeklySecondTitle: String
     
-    init(closeButton: Bool = false, firstTitle: String = "Upgrade to premium", secondTitle: String = "Enjoy full version of app without ads", annualFirstTitle: String = "Annual", annualSecondTitle: String = "3 day trial - then 9.99/month", monthlyFirstTitle: String = "Monthly", monthlySecondTitle: String = "3 day trial - then 9.99/month", weeklyFirstTitle: String = "Weekly", weeklySecondTitle: String = "3 day trial - then 6.99/month") {
+    init(closeButton: Bool = true, firstTitle: String = "Upgrade to premium", secondTitle: String = "Enjoy full version of app without ads", annualFirstTitle: String = "Annual", annualSecondTitle: String = "3 day trial - then", monthlyFirstTitle: String = "Monthly", monthlySecondTitle: String = "3 day trial - then", weeklyFirstTitle: String = "Weekly", weeklySecondTitle: String = "3 day trial - then") {
         self.ref = nil
         self.key = nil
         self.closeButton = closeButton

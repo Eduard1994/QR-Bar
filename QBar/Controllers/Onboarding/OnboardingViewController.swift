@@ -176,8 +176,8 @@ class OnboardingViewController: UIViewController {
                 }
             }
         } else {
-            slide.thenLabel.text = "\(onboarding.fourthTitle) -- a month"
-            slide.startYearlySecondButton.setTitle("-- \(onboarding.startYearlySecondTitle)", for: UIControl.State())
+            slide.thenLabel.text = "\(onboarding.fourthTitle) $7.99 a month"
+            slide.startYearlySecondButton.setTitle("$32.99 \(onboarding.startYearlySecondTitle)", for: UIControl.State())
         }
         
         slide.closeButton.isHidden = !onboarding.closeButton

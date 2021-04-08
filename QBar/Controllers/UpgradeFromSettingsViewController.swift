@@ -36,9 +36,9 @@ class UpgradeFromSettingsViewController: UIViewController {
     let service = Service()
 //    var products: [SKProduct] = []
     var productIDs: Set<ProductID> = []
-    var monthlyPrice: String = ""
-    var annualPrice: String = ""
-    var weeklyPrice: String = ""
+    var monthlyPrice: String = "$7.99"
+    var annualPrice: String = "$32.99"
+    var weeklyPrice: String = "$2.49"
     var subscriptions: Subscriptions = Subscriptions()
 //    var store: IAPManager!
 //    var typeIndex = 2
