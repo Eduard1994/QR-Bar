@@ -6,7 +6,6 @@
 //
 
 import UIKit
-//import StoreKit
 
 protocol UpgradeFromSettingsDelegate: class {
     func dismissFromUpgrade()
@@ -34,14 +33,11 @@ class UpgradeFromSettingsViewController: UIViewController {
     
     // MARK: - Properties
     let service = Service()
-//    var products: [SKProduct] = []
     var productIDs: Set<ProductID> = []
     var monthlyPrice: String = "$7.99"
     var annualPrice: String = "$32.99"
     var weeklyPrice: String = "$2.49"
     var subscriptions: Subscriptions = Subscriptions()
-//    var store: IAPManager!
-//    var typeIndex = 2
     
     var tapped: (annual: Bool, monthly: Bool, weekly: Bool) = (true, false, false)
     weak var delegate: UpgradeFromSettingsDelegate?
@@ -71,8 +67,6 @@ class UpgradeFromSettingsViewController: UIViewController {
         } else {
             imageHeightConstraint.constant = 480
         }
-        
-//        print(products)
         
         service.getSubscribeTitles(for: PremiumTab.Subscribe.rawValue) { (subscribe, error) in
             if let error = error {
@@ -176,33 +170,6 @@ class UpgradeFromSettingsViewController: UIViewController {
         }
     }
     
-    // MARK: - Upgrading product
-//    private func upgradeProduct(index: Int) {
-//        print(products)
-//        displayAnimatedActivityIndicatorView()
-//        guard !products.isEmpty else {
-//            self.hideAnimatedActivityIndicatorView()
-//            print("Cannot purchase subscription because products is empty!")
-//            return
-//        }
-//        self.store.buyProduct(products[index]) { [weak self] success, productId in
-//            guard let self = self else { return }
-//            guard success else {
-//                self.hideAnimatedActivityIndicatorView()
-//                DispatchQueue.main.async {
-//                    self.alert(title: "Failed to purchase product", message: "Check logs for details", preferredStyle: .alert, actionTitle: "OK")
-//                }
-//                return
-//            }
-//            print("Purchased")
-//            DispatchQueue.main.async {
-//                self.hideAnimatedActivityIndicatorView()
-//                NotificationCenter.default.post(name: hideSettingsUpgradeNotification, object: nil)
-//                self.dismiss(animated: true)
-//            }
-//        }
-//    }
-    
     // MARK: - Setting images for buttons
     private func setImagesForButton(tags: [Int]) {
         for i in 1...2 {
@@ -281,15 +248,5 @@ class UpgradeFromSettingsViewController: UIViewController {
     @IBAction func restoreTapped(_ sender: Any) {
         print("Restore tapped")
         restorePurchases()
-//        displayAnimatedActivityIndicatorView()
-//        DispatchQueue.global(qos: .userInitiated).async {
-//            self.store.restorePurchases { (succes, productID) in
-//                DispatchQueue.main.async {
-//                    guard succes else { return }
-//                    self.hideAnimatedActivityIndicatorView()
-//                    self.dismiss(animated: true, completion: nil)
-//                }
-//            }
-//        }
     }
 }

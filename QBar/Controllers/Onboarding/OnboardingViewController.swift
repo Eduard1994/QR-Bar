@@ -6,7 +6,6 @@
 //
 
 import UIKit
-//import StoreKit
 
 protocol UpgradeFromOnboardingDelegate: class {
     func dismissFromUpgrade()
@@ -22,10 +21,7 @@ class OnboardingViewController: UIViewController {
     
     // MARK: - Properties
     var slides: [Slide] = []
-//    var products: [SKProduct] = []
     var subscriptions: Subscriptions = Subscriptions()
-//    var store: IAPManager!
-//    var productIndex = 2
     let service = Service()
     var productIDs: Set<ProductID> = []
     
@@ -191,26 +187,6 @@ class OnboardingViewController: UIViewController {
         slide.privacyEulaLabel.text = onboarding.privacyEulaTitle
     }
     
-//    private func purchaseItem(index: Int) {
-//        print(products)
-//        displayAnimatedActivityIndicatorView()
-//        self.store.buyProduct(products[index]) { [weak self] success, productId in
-//            guard let self = self else { return }
-//            guard success else {
-//                self.hideAnimatedActivityIndicatorView()
-//                DispatchQueue.main.async {
-//                    self.alert(title: "Failed to purchase product", message: "Check logs for details", preferredStyle: .alert, actionTitle: "OK")
-//                }
-//                return
-//            }
-//            print("Purchased")
-//            DispatchQueue.main.async {
-//                self.hideAnimatedActivityIndicatorView()
-//                self.dismiss(animated: true, completion: nil) // Will be updated soon
-//            }
-//        }
-//    }
-    
     /// Purchasing product
     private func purchaseItem(productID: String) {
         displayAnimatedActivityIndicatorView()
@@ -276,14 +252,6 @@ class OnboardingViewController: UIViewController {
                     ErrorHandling.showError(message: "Check Internet Connection and try again.", controller: self)
                 }
             }
-//            self.productIndex = index
-//            if snakePageControl.currentPage == 2 {
-//                guard !products.isEmpty else {
-//                    print("Cannot purchase subscription because products is empty!")
-//                    return
-//                }
-//                self.purchaseItem(index: productIndex)
-//            }
         }
     }
     

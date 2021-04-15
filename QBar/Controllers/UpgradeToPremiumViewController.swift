@@ -6,7 +6,6 @@
 //
 
 import UIKit
-//import StoreKit
 
 protocol UpgradeFromRecentsDelegate: class {
     func dismissFromUpgrade()
@@ -23,8 +22,6 @@ class UpgradeToPremiumViewController: UIViewController {
     @IBOutlet weak var proceedWithBasicButton: UIButton!
     @IBOutlet weak var tryFreeButton: UIButton!
     @IBOutlet weak var startMonthlyView: UIView!
-//    @IBOutlet weak var startMonthlyButton: UIButton!
-//    @IBOutlet weak var priceAMonthButton: UIButton!
     @IBOutlet weak var startYearlyButton: UIButton!
     @IBOutlet weak var priceAYearButton: UIButton!
     @IBOutlet weak var trialLabel: UILabel!
@@ -34,11 +31,9 @@ class UpgradeToPremiumViewController: UIViewController {
     
     
     // MARK: - Properties
-//    var products: [SKProduct] = []
     let service = Service()
     var productIDs: Set<ProductID> = []
     var subscriptions: Subscriptions = Subscriptions()
-//    var store: IAPManager!
     
     weak var delegate: UpgradeFromRecentsDelegate?
     
@@ -67,8 +62,6 @@ class UpgradeToPremiumViewController: UIViewController {
         eulaButton.addLine(position: .LINE_POSITION_BOTTOM, color: .mainGrayAverage, width: 0.5)
         startMonthlyView.cornerRadius(to: 20)
         startMonthlyView.addBorder(width: 2.0, color: .mainBlack)
-        
-//        print(products)
         
         service.getOnboardingTitles(for: PremiumTab.Onboarding.rawValue) { (onboarding, error) in
             if let error = error {
@@ -153,31 +146,6 @@ class UpgradeToPremiumViewController: UIViewController {
             }
         }
     }
-    
-//    private func purchase(index: Int) {
-//        print(products)
-//        displayAnimatedActivityIndicatorView()
-//        guard !products.isEmpty else {
-//            self.hideAnimatedActivityIndicatorView()
-//            print("Cannot purchase subscription because products is empty!")
-//            return
-//        }
-//        self.store.buyProduct(products[index]) { [weak self] success, productId in
-//            guard let self = self else { return }
-//            guard success else {
-//                self.hideAnimatedActivityIndicatorView()
-//                DispatchQueue.main.async {
-//                    self.alert(title: "Failed to purchase product", message: "Check logs for details", preferredStyle: .alert, actionTitle: "OK")
-//                }
-//                return
-//            }
-//            print("Purchased")
-//            DispatchQueue.main.async {
-//                self.hideAnimatedActivityIndicatorView()
-//                self.dismiss(animated: true, completion: nil)
-//            }
-//        }
-//    }
     
     // MARK: - IBActions
     @IBAction func proceedWithBasicTapped(_ sender: Any) {
