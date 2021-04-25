@@ -30,6 +30,7 @@
 		FF4151C125EAD0930099E289 /* Code.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4151C025EAD0930099E289 /* Code.swift */; };
 		FF4151C625EAD14F0099E289 /* CodeCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4151C525EAD14F0099E289 /* CodeCellModel.swift */; };
 		FF4151CC25EAD7040099E289 /* RecentsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4151CB25EAD7040099E289 /* RecentsHeaderView.swift */; };
+		FF4885002635F081001F7D9C /* QRAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4884FF2635F081001F7D9C /* QRAnalytics.swift */; };
 		FF4BB46225EAB31400A461D4 /* SegmentedControlSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4BB46125EAB31400A461D4 /* SegmentedControlSegment.swift */; };
 		FF4BB46D25EAB3D100A461D4 /* IconSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4BB46C25EAB3D100A461D4 /* IconSegment.swift */; };
 		FF4BB47225EAB48200A461D4 /* LabelSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4BB47125EAB48200A461D4 /* LabelSegment.swift */; };
@@ -148,6 +149,7 @@
 		FF4151C025EAD0930099E289 /* Code.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Code.swift; sourceTree = "<group>"; };
 		FF4151C525EAD14F0099E289 /* CodeCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeCellModel.swift; sourceTree = "<group>"; };
 		FF4151CB25EAD7040099E289 /* RecentsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsHeaderView.swift; sourceTree = "<group>"; };
+		FF4884FF2635F081001F7D9C /* QRAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRAnalytics.swift; sourceTree = "<group>"; };
 		FF4BB46125EAB31400A461D4 /* SegmentedControlSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlSegment.swift; sourceTree = "<group>"; };
 		FF4BB46C25EAB3D100A461D4 /* IconSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSegment.swift; sourceTree = "<group>"; };
 		FF4BB47125EAB48200A461D4 /* LabelSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelSegment.swift; sourceTree = "<group>"; };
@@ -334,6 +336,14 @@
 			path = HeaderView;
 			sourceTree = "<group>";
 		};
+		FF4884FE2635F069001F7D9C /* FirebaseAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				FF4884FF2635F081001F7D9C /* QRAnalytics.swift */,
+			);
+			path = FirebaseAnalytics;
+			sourceTree = "<group>";
+		};
 		FF4BB46025EAB2F000A461D4 /* Segments */ = {
 			isa = PBXGroup;
 			children = (
@@ -513,6 +523,7 @@
 		FFA0F0E125E8CD3900C79D8C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				FF4884FE2635F069001F7D9C /* FirebaseAnalytics */,
 				FFA0F0E225E8CD4600C79D8C /* Switcher.swift */,
 				FF601C7F25EEDC950015DD22 /* Cache.swift */,
 				FF58971525F414AE00CEBE62 /* ErrorHandling.swift */,
@@ -889,6 +900,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFE4128B25F07BD30025662E /* PremiumTitle.swift in Sources */,
+				FF4885002635F081001F7D9C /* QRAnalytics.swift in Sources */,
 				FF3921CB25F00832006DEED3 /* IAPManager.swift in Sources */,
 				FF8D44E625F0229200964BAA /* UpgradeToPremiumViewController.swift in Sources */,
 				FF4151B925EAD0020099E289 /* RecentsTableViewCell.swift in Sources */,
@@ -1126,14 +1138,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9487YL2FBF;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/QBar/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pcmrail.qr-bar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1148,14 +1160,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9487YL2FBF;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/QBar/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pcmrail.qr-bar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

@@ -101,6 +101,9 @@ class UpgradeToPremiumViewController: UIViewController {
         self.tryFreeButton.setTitle(onboarding.tryFreeTitle, for: UIControl.State())
         self.startYearlyButton.setTitle(onboarding.startYearlyFirstTitle, for: UIControl.State())
         self.trialLabel.text = onboarding.privacyEulaTitle
+        
+        self.thenLabel.isHidden = onboarding.fourthTitleIsHidden
+        self.priceAYearButton.isHidden = onboarding.startYearlySecondTitleIsHIdden
     }
     
     /// Purchasing product
@@ -114,12 +117,16 @@ class UpgradeToPremiumViewController: UIViewController {
                 self.hideAnimatedActivityIndicatorView()
                 purchasedAny = true
                 self.alert(title: "Purchase Success", message: "\(purchase.product.localizedTitle), \(purchase.product.localizedPrice ?? "")", preferredStyle: .alert, cancelTitle: nil, cancelHandler: nil, actionTitle: "OK", actionHandler: {
+                    /// Firebase Analytics
+                    QRAnalytics.shared.purchaseAnalytics(userID: User.currentUser?.uid ?? "", paymentType: purchase.product.localizedTitle, totalPrice: purchase.product.localizedPrice ?? "", success: "1", currency: purchase.product.priceLocale.currencySymbol ?? "USD")
                     self.dismiss(animated: true, completion: nil)
                     self.delegate?.purchased(purchases: [purchase.productId])
                 })
             case .error(let error):
                 self.hideAnimatedActivityIndicatorView()
                 ErrorHandling.showError(title: "Purchase failed", message: error.localizedDescription, controller: self)
+                /// Firebase Analytics
+                QRAnalytics.shared.purchaseAnalytics(userID: User.currentUser?.uid ?? "", paymentType: error.localizedDescription, totalPrice: "", success: "0", currency: "USD")
                 print("Purchase Failed: \(error)")
                 switch error.code {
                 case .unknown:
@@ -157,6 +164,7 @@ class UpgradeToPremiumViewController: UIViewController {
     @IBAction func tryFreeTapped(_ sender: Any) {
 //        purchase(index: 1)
         print("Try free tapped")
+        QRAnalytics.shared.tappedToSubscribeButton(userID: User.currentUser?.uid ?? "", button: "Try Free Button")
         if service.isConnectedToInternet {
             for productID in productIDs {
                 if productID.contains("month") {
@@ -170,6 +178,7 @@ class UpgradeToPremiumViewController: UIViewController {
     
     @IBAction func startYearlyTapped(_ sender: Any) {
         print("Start Yearly Tapped")
+        QRAnalytics.shared.tappedToSubscribeButton(userID: User.currentUser?.uid ?? "", button: "Start Yearly Button")
         if service.isConnectedToInternet {
             for productID in productIDs {
                 if productID.contains("year") {

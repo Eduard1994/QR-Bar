@@ -112,12 +112,16 @@ class UpgradeFromSettingsViewController: UIViewController {
                 self.hideAnimatedActivityIndicatorView()
                 purchasedAny = true
                 self.alert(title: "Purchase Success", message: "\(purchase.product.localizedTitle), \(purchase.product.localizedPrice ?? "")", preferredStyle: .alert, cancelTitle: nil, cancelHandler: nil, actionTitle: "OK", actionHandler: {
+                    /// Firebase Analytics
+                    QRAnalytics.shared.purchaseAnalytics(userID: User.currentUser?.uid ?? "", paymentType: purchase.product.localizedTitle, totalPrice: purchase.product.localizedPrice ?? "", success: "1", currency: purchase.product.priceLocale.currencySymbol ?? "USD")
                     self.dismiss(animated: true, completion: nil)
                     self.delegate?.purchased(purchases: [purchase.productId])
                 })
             case .error(let error):
                 self.hideAnimatedActivityIndicatorView()
                 ErrorHandling.showError(title: "Purchase failed", message: error.localizedDescription, controller: self)
+                /// Firebase Analytics
+                QRAnalytics.shared.purchaseAnalytics(userID: User.currentUser?.uid ?? "", paymentType: error.localizedDescription, totalPrice: "", success: "0", currency: "USD")
                 print("Purchase Failed: \(error)")
                 switch error.code {
                 case .unknown:
@@ -200,6 +204,7 @@ class UpgradeFromSettingsViewController: UIViewController {
         tapped.annual = true
         tapped.monthly = false
         tapped.weekly = false
+        QRAnalytics.shared.tappedToSubscribeButton(userID: User.currentUser?.uid ?? "", button: "Annual Button")
     }
     
     @IBAction func monthlyTapped(_ sender: Any) {
@@ -208,6 +213,7 @@ class UpgradeFromSettingsViewController: UIViewController {
         tapped.annual = false
         tapped.monthly = true
         tapped.weekly = false
+        QRAnalytics.shared.tappedToSubscribeButton(userID: User.currentUser?.uid ?? "", button: "Monthly Button")
     }
     
     @IBAction func weeklyTapped(_ sender: Any) {
@@ -216,6 +222,7 @@ class UpgradeFromSettingsViewController: UIViewController {
         tapped.annual = false
         tapped.monthly = false
         tapped.weekly = true
+        QRAnalytics.shared.tappedToSubscribeButton(userID: User.currentUser?.uid ?? "", button: "Weekly Button")
     }
     
     @IBAction func upgradeTapped(_ sender: Any) {
