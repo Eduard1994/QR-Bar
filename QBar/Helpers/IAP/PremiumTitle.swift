@@ -19,6 +19,7 @@ struct OnboardingTitle {
     let ref: DatabaseReference?
     let key: String?
     var closeButton: Bool
+    var proceedIsHidden: Bool
     var firstTitle: String
     var secondTitle: String
     var thirdTitle: String
@@ -31,7 +32,7 @@ struct OnboardingTitle {
     var startYearlySecondTitleIsHIdden: Bool
     var privacyEulaTitle: String
     
-    init(closeButton: Bool = false, firstTitle: String = "Upgrade to premium", secondTitle: String = "Enjoy full version of app without ads", thirdTitle: String = "Start your 3-day free trial.", fourthTitle: String = "Then", fourthTitleIsHidden: Bool = false, basicTitle: String = "Proceed with Basic", tryFreeTitle: String = "Try Free and subscribe", startYearlyFirstTitle: String = "Start Yearly Plan", startYearlySecondTitle: String = "a year", startYearlySecondTitleIsHIdden: Bool = false, privacyEulaTitle: String = "This trial automatically renews into a paidsubscribtion and will continue to automatically renew until you cancel. Please see our") {
+    init(closeButton: Bool = true, proceedIsHidden: Bool = false, firstTitle: String = "Upgrade to premium", secondTitle: String = "Enjoy full version of app without ads", thirdTitle: String = "Start your 3-day free trial.", fourthTitle: String = "Then", fourthTitleIsHidden: Bool = false, basicTitle: String = "Proceed with Basic", tryFreeTitle: String = "Try Free and subscribe", startYearlyFirstTitle: String = "Start Yearly Plan", startYearlySecondTitle: String = "a year", startYearlySecondTitleIsHIdden: Bool = false, privacyEulaTitle: String = "This trial automatically renews into a paidsubscribtion and will continue to automatically renew until you cancel. Please see our") {
         self.ref = nil
         self.key = nil
         self.closeButton = closeButton
@@ -46,6 +47,7 @@ struct OnboardingTitle {
         self.startYearlySecondTitle = startYearlySecondTitle
         self.startYearlySecondTitleIsHIdden = startYearlySecondTitleIsHIdden
         self.privacyEulaTitle = privacyEulaTitle
+        self.proceedIsHidden = proceedIsHidden
     }
     
     // MARK: - Init from Snapshot
@@ -53,6 +55,7 @@ struct OnboardingTitle {
         guard
             let value = snapshot.value as? [String: AnyObject],
             let closeButton = value["closeButton"] as? Bool,
+            let proceedIsHidden = value["proceedIsHidden"] as? Bool,
             let firstTitle = value["firstTitle"] as? String,
             let secondTitle = value["secondTitle"] as? String,
             let thirdTitle = value["thirdTitle"] as? String,
@@ -83,11 +86,13 @@ struct OnboardingTitle {
         self.startYearlySecondTitle = startYearlySecondTitle
         self.startYearlySecondTitleIsHIdden = startYearlySecondTitleIsHIdden
         self.privacyEulaTitle = privacyEulaTitle
+        self.proceedIsHidden = proceedIsHidden
     }
     
     func toAnyObject() -> Any {
         return [
             "closeButton": closeButton,
+            "proceedIsHidden": proceedIsHidden,
             "firstTitle": firstTitle,
             "secondTitle": secondTitle,
             "thirdTitle": thirdTitle,

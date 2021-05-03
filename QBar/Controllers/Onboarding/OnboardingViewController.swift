@@ -193,6 +193,8 @@ class OnboardingViewController: UIViewController {
         
         slide.closeButton.isHidden = !onboarding.closeButton
         slide.closeButton.isEnabled = onboarding.closeButton
+        slide.proceedWithBasicButton.isHidden = onboarding.proceedIsHidden
+        slide.proceedWithBasicButton.isEnabled = !onboarding.proceedIsHidden
         slide.premiumLabel.text = onboarding.firstTitle
         slide.enjoyLabel.text = onboarding.secondTitle
         slide.startFreeLabel.text = onboarding.thirdTitle
@@ -203,6 +205,10 @@ class OnboardingViewController: UIViewController {
         
         slides.last?.thenLabel.isHidden = onboarding.fourthTitleIsHidden
         slides.last?.startYearlySecondButton.isHidden = onboarding.startYearlySecondTitleIsHIdden
+        slides[0].closeButton.isHidden = true
+        slides[0].closeButton.isEnabled = false
+        slides[1].closeButton.isHidden = true
+        slides[1].closeButton.isEnabled = false
     }
     
     /// Purchasing product

@@ -94,6 +94,8 @@ class UpgradeToPremiumViewController: UIViewController {
         
         self.closeButton.isHidden = !onboarding.closeButton
         self.closeButton.isEnabled = onboarding.closeButton
+        self.proceedWithBasicButton.isHidden = onboarding.proceedIsHidden
+        self.proceedWithBasicButton.isEnabled = !onboarding.proceedIsHidden
         self.upgradeLabel.text = onboarding.firstTitle
         self.enjoyLabel.text = onboarding.secondTitle
         self.startFreeLabel.text = onboarding.thirdTitle
