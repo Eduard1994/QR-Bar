@@ -93,6 +93,9 @@
 		FFB6EA8D25EAEC3300290F89 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB6EA8C25EAEC3300290F89 /* FooterView.swift */; };
 		FFB8A38F25E9BF1B00DA1E67 /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB8A38E25E9BF1B00DA1E67 /* PrivacyViewController.swift */; };
 		FFD7E69725F31FEF00B176F4 /* UpgradeFromSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD7E69625F31FEF00B176F4 /* UpgradeFromSettingsViewController.swift */; };
+		FFDEC3A1269BBCA6005BF738 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDEC3A0269BBCA6005BF738 /* VideoView.swift */; };
+		FFDEC3AB269BBDB5005BF738 /* video1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FFDEC3A9269BBDB3005BF738 /* video1.mp4 */; };
+		FFDEC3AC269BBDB5005BF738 /* video2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FFDEC3AA269BBDB5005BF738 /* video2.mp4 */; };
 		FFE4128B25F07BD30025662E /* PremiumTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE4128A25F07BD30025662E /* PremiumTitle.swift */; };
 		FFE4129025F087100025662E /* RecentsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE4128F25F087100025662E /* RecentsDetailViewController.swift */; };
 		FFE4129525F091570025662E /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE4129425F091570025662E /* UITextField+Extension.swift */; };
@@ -218,6 +221,9 @@
 		FFB6EA8C25EAEC3300290F89 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
 		FFB8A38E25E9BF1B00DA1E67 /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
 		FFD7E69625F31FEF00B176F4 /* UpgradeFromSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeFromSettingsViewController.swift; sourceTree = "<group>"; };
+		FFDEC3A0269BBCA6005BF738 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
+		FFDEC3A9269BBDB3005BF738 /* video1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video1.mp4; sourceTree = "<group>"; };
+		FFDEC3AA269BBDB5005BF738 /* video2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video2.mp4; sourceTree = "<group>"; };
 		FFE4128A25F07BD30025662E /* PremiumTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumTitle.swift; sourceTree = "<group>"; };
 		FFE4128F25F087100025662E /* RecentsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsDetailViewController.swift; sourceTree = "<group>"; };
 		FFE4129425F091570025662E /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
@@ -523,6 +529,7 @@
 		FFA0F0E125E8CD3900C79D8C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				FFDEC39F269BBC98005BF738 /* VideoView */,
 				FF4884FE2635F069001F7D9C /* FirebaseAnalytics */,
 				FFA0F0E225E8CD4600C79D8C /* Switcher.swift */,
 				FF601C7F25EEDC950015DD22 /* Cache.swift */,
@@ -560,6 +567,7 @@
 		FFA0F0F825E8CE4300C79D8C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FFDEC3A8269BBD97005BF738 /* Video */,
 				FFA0F0F925E8CE5000C79D8C /* Fonts */,
 			);
 			path = Resources;
@@ -629,6 +637,23 @@
 				FFB6EA8C25EAEC3300290F89 /* FooterView.swift */,
 			);
 			path = FooterView;
+			sourceTree = "<group>";
+		};
+		FFDEC39F269BBC98005BF738 /* VideoView */ = {
+			isa = PBXGroup;
+			children = (
+				FFDEC3A0269BBCA6005BF738 /* VideoView.swift */,
+			);
+			path = VideoView;
+			sourceTree = "<group>";
+		};
+		FFDEC3A8269BBD97005BF738 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				FFDEC3A9269BBDB3005BF738 /* video1.mp4 */,
+				FFDEC3AA269BBDB5005BF738 /* video2.mp4 */,
+			);
+			path = Video;
 			sourceTree = "<group>";
 		};
 		FFF7146725EDB11600983624 /* User */ = {
@@ -747,10 +772,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFDEC3AC269BBDB5005BF738 /* video2.mp4 in Resources */,
 				FFA0F0F425E8CDD600C79D8C /* Slide.xib in Resources */,
 				FFA0F11D25E8CE9400C79D8C /* SF-Pro-Display-Ultralight.otf in Resources */,
 				FFA0F11025E8CE9300C79D8C /* SF-Pro-Display-Heavy.otf in Resources */,
 				FF8D44EB25F022AD00964BAA /* Premium.storyboard in Resources */,
+				FFDEC3AB269BBDB5005BF738 /* video1.mp4 in Resources */,
 				FFA0F13425E8CEEF00C79D8C /* SF-Pro-Text-Medium.otf in Resources */,
 				FFA0F13825E8CEEF00C79D8C /* SF-Pro-Text-Bold.otf in Resources */,
 				FFA0F0A525E8CC0000C79D8C /* LaunchScreen.storyboard in Resources */,
@@ -914,6 +941,7 @@
 				FF197D3525EC8CDC002439D4 /* QRBarcodeScannerViewController.swift in Sources */,
 				FF197D2325EC8B21002439D4 /* Functions.swift in Sources */,
 				FFA0F16425E8E42400C79D8C /* UIColor+Extension.swift in Sources */,
+				FFDEC3A1269BBCA6005BF738 /* VideoView.swift in Sources */,
 				FF4BB4A725EAB90900A461D4 /* MainSegmentedViewController.swift in Sources */,
 				FF601CB325EEFC300015DD22 /* UIImage+Extension.swift in Sources */,
 				FFA0F15F25E8E3BF00C79D8C /* UIViewController+Extension.swift in Sources */,
@@ -1137,6 +1165,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9487YL2FBF;
 				INFOPLIST_FILE = "$(SRCROOT)/QBar/Supporting Files/Info.plist";
@@ -1148,6 +1177,7 @@
 				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pcmrail.qr-bar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1159,6 +1189,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9487YL2FBF;
 				INFOPLIST_FILE = "$(SRCROOT)/QBar/Supporting Files/Info.plist";
@@ -1170,6 +1201,7 @@
 				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pcmrail.qr-bar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
