@@ -41,6 +41,9 @@ class Slide: UIView {
     @IBOutlet weak var privacyPolicyButton: UIButton!
     @IBOutlet weak var eulaButton: UIButton!
     
+    @IBOutlet weak var closeButtonTop: NSLayoutConstraint! // default 43
+    @IBOutlet weak var videoHeightConstraint: NSLayoutConstraint! // default 381
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         firstLabel.textAlignment = .center
@@ -107,6 +110,7 @@ class Slide: UIView {
         slide1.privacyPolicyButton.isEnabled = false
         slide1.eulaButton.isEnabled = false
         slide1.imageView.isHidden = false
+        slide1.closeButtonTop.constant = 43
         
         let slide2: Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
         slide2.imageView.image = UIImage(named: "barCodeOnboarding")
@@ -154,6 +158,7 @@ class Slide: UIView {
         slide2.privacyPolicyButton.isEnabled = false
         slide2.eulaButton.isEnabled = false
         slide2.imageView.isHidden = false
+        slide2.closeButtonTop.constant = 43
         
         let slide3: Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
         slide3.imageView.image = UIImage(named: "upgradeBackground")
@@ -163,20 +168,28 @@ class Slide: UIView {
         switch type {
         case .iPhone5_5S_5C_SE:
             slide3.bottomConstraint.constant = 315
+            slide3.videoHeightConstraint.constant = 261
         case .iPhone6_6S_7_8_SE2:
             slide3.bottomConstraint.constant = 315
+            slide3.videoHeightConstraint.constant = 360
         case .iPhone6Plus_6SPlus_7Plus_8Plus:
             slide3.bottomConstraint.constant = 315
+            slide3.videoHeightConstraint.constant = 400
         case .iPhone12Mini:
             slide3.bottomConstraint.constant = 345
+            slide3.videoHeightConstraint.constant = 460
         case .iPhoneX_XS_11Pro:
             slide3.bottomConstraint.constant = 345
+            slide3.videoHeightConstraint.constant = 490
         case .iPhone12_12Pro:
             slide3.bottomConstraint.constant = 345
+            slide3.videoHeightConstraint.constant = 520
         case .iPhoneXR_XSMax_11_11ProMax:
             slide3.bottomConstraint.constant = 345
+            slide3.videoHeightConstraint.constant = 560
         case .iPhone12ProMax:
             slide3.bottomConstraint.constant = 345
+            slide3.videoHeightConstraint.constant = 560
         default:
             break
         }
@@ -185,6 +198,7 @@ class Slide: UIView {
         slide3.premiumLabel.isHidden = true
         slide3.enjoyLabel.isHidden = true
         slide3.imageView.isHidden = true
+        slide3.closeButtonTop.constant = 25
         
 //        slide3.closeButton.isHidden = false
 //        slide3.closeButton.isEnabled = true

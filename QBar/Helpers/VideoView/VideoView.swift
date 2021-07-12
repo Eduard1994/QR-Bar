@@ -11,12 +11,18 @@ import AVFoundation
 
 class VideoView: UIView {
     
+    var videoLayer: CALayer?
     var playerLayer: AVPlayerLayer?
     var player: AVPlayer?
     var isLoop: Bool = false
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    override func layoutSublayers(of layer: CALayer) {
+        super.layoutSublayers(of: layer)
+        videoLayer?.frame = self.bounds
     }
     
     func configure(resource: String) {
@@ -27,11 +33,12 @@ class VideoView: UIView {
         let videoURL = URL(fileURLWithPath: path)
         player = AVPlayer(url: videoURL)
         playerLayer = AVPlayerLayer(player: player)
-        playerLayer?.frame = bounds
         playerLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        playerLayer?.frame = bounds
         if let playerLayer = self.playerLayer {
             layer.addSublayer(playerLayer)
         }
+        videoLayer = playerLayer
         NotificationCenter.default.addObserver(self, selector: #selector(reachTheEndOfTheVideo(_:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: self.player?.currentItem)
         
     }

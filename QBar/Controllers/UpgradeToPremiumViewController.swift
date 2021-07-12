@@ -30,6 +30,7 @@ class UpgradeToPremiumViewController: UIViewController {
     @IBOutlet weak var closeButton: UIButton!
     
     @IBOutlet weak var videoView: VideoView!
+    @IBOutlet weak var videoHeightConstraint: NSLayoutConstraint!
     
     // MARK: - Properties
     let service = Service()
@@ -74,6 +75,27 @@ class UpgradeToPremiumViewController: UIViewController {
         eulaButton.addLine(position: .LINE_POSITION_BOTTOM, color: .mainGrayAverage, width: 0.5)
 //        startMonthlyView.cornerRadius(to: 20)
 //        startMonthlyView.addBorder(width: 2.0, color: .mainBlack)
+        
+        switch type {
+        case .iPhone5_5S_5C_SE:
+            videoHeightConstraint.constant = 261
+        case .iPhone6_6S_7_8_SE2:
+            videoHeightConstraint.constant = 360
+        case .iPhone6Plus_6SPlus_7Plus_8Plus:
+            videoHeightConstraint.constant = 400
+        case .iPhone12Mini:
+            videoHeightConstraint.constant = 460
+        case .iPhoneX_XS_11Pro:
+            videoHeightConstraint.constant = 490
+        case .iPhone12_12Pro:
+            videoHeightConstraint.constant = 520
+        case .iPhoneXR_XSMax_11_11ProMax:
+            videoHeightConstraint.constant = 560
+        case .iPhone12ProMax:
+            videoHeightConstraint.constant = 560
+        default:
+            break
+        }
         
         service.getOnboardingTitles(for: PremiumTab.Onboarding.rawValue) { (onboarding, error) in
             if let error = error {

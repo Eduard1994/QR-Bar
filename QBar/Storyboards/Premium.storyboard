@@ -31,14 +31,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qJ8-vJ-LIc" customClass="VideoView" customModule="QBar" customModuleProvider="target">
-                                <rect key="frame" x="16" y="35" width="343" height="381"/>
+                                <rect key="frame" x="16" y="62" width="343" height="381"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="381" id="8C9-cM-cwX"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="u5R-Oy-aGk">
-                                <rect key="frame" x="47" y="512" width="281" height="64"/>
+                                <rect key="frame" x="47" y="531" width="281" height="64"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YPe-6K-2zW">
                                         <rect key="frame" x="0.0" y="0.0" width="281" height="64"/>
@@ -57,20 +57,20 @@
                                 </constraints>
                             </stackView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JLL-S3-FIY">
-                                <rect key="frame" x="319" y="43" width="32" height="32"/>
+                                <rect key="frame" x="319" y="15" width="32" height="32"/>
                                 <state key="normal" image="closeOnboarding"/>
                                 <connections>
                                     <action selector="closeButtonTapped:" destination="ULo-ah-6GT" eventType="touchUpInside" id="PaO-zt-CTq"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start your 3-day free trial" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OhC-vz-IPI">
-                                <rect key="frame" x="94.5" y="441" width="186.5" height="21.5"/>
+                                <rect key="frame" x="94.5" y="471" width="186.5" height="21.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Then $7.99 a month" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aQH-rH-PLt">
-                                <rect key="frame" x="111" y="463.5" width="153" height="21.5"/>
+                                <rect key="frame" x="111" y="493.5" width="153" height="21.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -122,25 +122,25 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="hp5-eE-r9V"/>
+                        <viewLayoutGuide key="safeArea" id="M0Y-Nz-V8t"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="JLL-S3-FIY" firstAttribute="top" secondItem="qJ8-vJ-LIc" secondAttribute="top" constant="8" id="0x6-ev-OUT"/>
                             <constraint firstAttribute="trailing" secondItem="u5R-Oy-aGk" secondAttribute="trailing" constant="47" id="58K-Df-JWI"/>
-                            <constraint firstItem="ABu-fs-AHk" firstAttribute="trailing" secondItem="hp5-eE-r9V" secondAttribute="trailing" constant="-16" id="9z2-KP-1Xd"/>
-                            <constraint firstItem="qJ8-vJ-LIc" firstAttribute="top" secondItem="hp5-eE-r9V" secondAttribute="top" constant="35" id="CBa-76-phg"/>
-                            <constraint firstItem="qJ8-vJ-LIc" firstAttribute="leading" secondItem="hp5-eE-r9V" secondAttribute="leading" constant="16" id="MX5-gT-wwO"/>
-                            <constraint firstItem="OhC-vz-IPI" firstAttribute="top" secondItem="qJ8-vJ-LIc" secondAttribute="bottom" constant="25" id="Nia-Nm-F4z"/>
-                            <constraint firstItem="ABu-fs-AHk" firstAttribute="leading" secondItem="hp5-eE-r9V" secondAttribute="leading" constant="16" id="T7j-qZ-Tk3"/>
+                            <constraint firstItem="ABu-fs-AHk" firstAttribute="trailing" secondItem="Df0-Ez-FuK" secondAttribute="trailing" constant="-16" id="9z2-KP-1Xd"/>
+                            <constraint firstItem="qJ8-vJ-LIc" firstAttribute="top" secondItem="JLL-S3-FIY" secondAttribute="bottom" constant="15" id="AoI-6x-c9A"/>
+                            <constraint firstItem="qJ8-vJ-LIc" firstAttribute="leading" secondItem="Df0-Ez-FuK" secondAttribute="leading" constant="16" id="MX5-gT-wwO"/>
+                            <constraint firstItem="ABu-fs-AHk" firstAttribute="leading" secondItem="Df0-Ez-FuK" secondAttribute="leading" constant="16" id="T7j-qZ-Tk3"/>
                             <constraint firstItem="u5R-Oy-aGk" firstAttribute="centerX" secondItem="Df0-Ez-FuK" secondAttribute="centerX" id="aGc-uw-s2K"/>
-                            <constraint firstItem="aQH-rH-PLt" firstAttribute="centerX" secondItem="hp5-eE-r9V" secondAttribute="centerX" id="bT6-1o-e9C"/>
-                            <constraint firstItem="qJ8-vJ-LIc" firstAttribute="centerX" secondItem="hp5-eE-r9V" secondAttribute="centerX" id="efp-FC-5f2"/>
+                            <constraint firstItem="aQH-rH-PLt" firstAttribute="centerX" secondItem="Df0-Ez-FuK" secondAttribute="centerX" id="bT6-1o-e9C"/>
+                            <constraint firstItem="qJ8-vJ-LIc" firstAttribute="centerX" secondItem="Df0-Ez-FuK" secondAttribute="centerX" id="efp-FC-5f2"/>
                             <constraint firstItem="u5R-Oy-aGk" firstAttribute="leading" secondItem="Df0-Ez-FuK" secondAttribute="leading" constant="47" id="gHS-HS-dDd"/>
                             <constraint firstItem="aQH-rH-PLt" firstAttribute="top" secondItem="OhC-vz-IPI" secondAttribute="bottom" constant="1" id="jLy-kc-I0t"/>
-                            <constraint firstItem="ABu-fs-AHk" firstAttribute="top" secondItem="u5R-Oy-aGk" secondAttribute="bottom" constant="21" id="lbY-xC-aVi"/>
-                            <constraint firstItem="OhC-vz-IPI" firstAttribute="centerX" secondItem="hp5-eE-r9V" secondAttribute="centerX" id="sTq-p5-7D8"/>
-                            <constraint firstItem="hp5-eE-r9V" firstAttribute="bottom" secondItem="ABu-fs-AHk" secondAttribute="bottom" constant="10" id="sZ4-1z-HxL"/>
-                            <constraint firstItem="JLL-S3-FIY" firstAttribute="trailing" secondItem="qJ8-vJ-LIc" secondAttribute="trailing" constant="-8" id="uyz-g7-YgM"/>
+                            <constraint firstItem="ABu-fs-AHk" firstAttribute="top" secondItem="u5R-Oy-aGk" secondAttribute="bottom" constant="2" id="lbY-xC-aVi"/>
+                            <constraint firstItem="M0Y-Nz-V8t" firstAttribute="trailing" secondItem="JLL-S3-FIY" secondAttribute="trailing" constant="24" id="oXZ-Ue-Fy4"/>
+                            <constraint firstItem="u5R-Oy-aGk" firstAttribute="top" secondItem="aQH-rH-PLt" secondAttribute="bottom" constant="16" id="peB-PT-cPU"/>
+                            <constraint firstItem="JLL-S3-FIY" firstAttribute="top" secondItem="M0Y-Nz-V8t" secondAttribute="top" constant="15" id="rmV-BV-Tgb"/>
+                            <constraint firstItem="OhC-vz-IPI" firstAttribute="centerX" secondItem="Df0-Ez-FuK" secondAttribute="centerX" id="sTq-p5-7D8"/>
+                            <constraint firstAttribute="bottom" secondItem="ABu-fs-AHk" secondAttribute="bottom" constant="10" id="sZ4-1z-HxL"/>
                         </constraints>
                     </view>
                     <connections>
@@ -151,6 +151,7 @@
                         <outlet property="thenLabel" destination="aQH-rH-PLt" id="7Dh-fr-B45"/>
                         <outlet property="trialLabel" destination="HgR-my-H7P" id="FOU-8Z-ldH"/>
                         <outlet property="tryFreeButton" destination="YPe-6K-2zW" id="v6v-lu-tpy"/>
+                        <outlet property="videoHeightConstraint" destination="8C9-cM-cwX" id="Fa5-8p-0Xa"/>
                         <outlet property="videoView" destination="qJ8-vJ-LIc" id="MuG-7C-fUG"/>
                     </connections>
                 </viewController>

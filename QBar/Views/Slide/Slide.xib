@@ -38,7 +38,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B2a-tK-G0H" customClass="VideoView" customModule="QBar" customModuleProvider="target">
-                    <rect key="frame" x="16" y="35" width="343" height="381"/>
+                    <rect key="frame" x="16" y="90" width="343" height="381"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="381" id="td3-gQ-qbC"/>
@@ -196,13 +196,13 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start your 3-day free trial." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9QA-X4-jcF">
-                    <rect key="frame" x="10" y="451" width="355" height="21.5"/>
+                    <rect key="frame" x="10" y="524.5" width="355" height="21.5"/>
                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Then $7.99 a month" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ii1-6s-Mqk">
-                    <rect key="frame" x="10" y="473" width="355" height="21.5"/>
+                    <rect key="frame" x="10" y="546.5" width="355" height="21.5"/>
                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="18"/>
                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -210,13 +210,13 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="9QA-X4-jcF" firstAttribute="top" secondItem="B2a-tK-G0H" secondAttribute="bottom" constant="35" id="2Kl-gJ-W0w"/>
                 <constraint firstItem="gyS-4y-gl3" firstAttribute="top" secondItem="JIr-lK-B5c" secondAttribute="bottom" constant="24" id="2NA-4h-fw0"/>
                 <constraint firstItem="sFr-H3-V0j" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="2mf-Mr-lNQ"/>
+                <constraint firstItem="B2a-tK-G0H" firstAttribute="top" secondItem="NzH-l0-XwU" secondAttribute="bottom" constant="15" id="4ux-B5-wze"/>
                 <constraint firstItem="FRp-F6-Gcg" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="5Rh-lo-DXw"/>
                 <constraint firstItem="JIr-lK-B5c" firstAttribute="trailing" secondItem="gyS-4y-gl3" secondAttribute="trailing" id="5ld-eG-5ow"/>
-                <constraint firstItem="NzH-l0-XwU" firstAttribute="top" secondItem="mrR-bR-kzx" secondAttribute="top" constant="8" id="8U4-ho-cCk"/>
                 <constraint firstItem="JIr-lK-B5c" firstAttribute="top" secondItem="0dG-DZ-3Ty" secondAttribute="bottom" constant="24" id="8Yq-6P-it7"/>
+                <constraint firstAttribute="trailing" secondItem="NzH-l0-XwU" secondAttribute="trailing" constant="24" id="9YV-D6-J82"/>
                 <constraint firstItem="Ii1-6s-Mqk" firstAttribute="leading" secondItem="9QA-X4-jcF" secondAttribute="leading" id="BXx-ah-GnC"/>
                 <constraint firstAttribute="bottom" secondItem="mrR-bR-kzx" secondAttribute="bottom" constant="251" id="CQu-Qx-pas"/>
                 <constraint firstItem="Ii1-6s-Mqk" firstAttribute="centerX" secondItem="9QA-X4-jcF" secondAttribute="centerX" id="D1Q-sM-Mxd"/>
@@ -227,8 +227,8 @@
                 <constraint firstItem="GBA-4r-8Mk" firstAttribute="top" secondItem="FRp-F6-Gcg" secondAttribute="bottom" constant="16" id="KqB-bt-cZ0"/>
                 <constraint firstItem="cDY-4A-Oxc" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="LLZ-u7-s2a"/>
                 <constraint firstItem="9QA-X4-jcF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="OIE-mp-LjQ"/>
+                <constraint firstItem="NzH-l0-XwU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="43" id="PNn-Q1-Flv"/>
                 <constraint firstItem="JIr-lK-B5c" firstAttribute="width" secondItem="gyS-4y-gl3" secondAttribute="width" id="Pgb-PH-MRG"/>
-                <constraint firstItem="B2a-tK-G0H" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="35" id="QHF-5L-RYd"/>
                 <constraint firstAttribute="trailing" secondItem="sFr-H3-V0j" secondAttribute="trailing" constant="16" id="R9C-s2-Fgy"/>
                 <constraint firstItem="Zn9-sT-uEB" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="RR2-CD-xBX"/>
                 <constraint firstItem="Zn9-sT-uEB" firstAttribute="top" secondItem="V0p-Dr-gj0" secondAttribute="bottom" constant="11" id="RWh-hm-zqN"/>
@@ -245,15 +245,16 @@
                 <constraint firstItem="mrR-bR-kzx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="35" id="mAQ-y9-Tkw"/>
                 <constraint firstItem="cDY-4A-Oxc" firstAttribute="top" secondItem="mrR-bR-kzx" secondAttribute="top" constant="92" id="ofy-Bv-Nih"/>
                 <constraint firstItem="gyS-4y-gl3" firstAttribute="centerX" secondItem="mrR-bR-kzx" secondAttribute="centerX" id="p63-O0-gcK"/>
+                <constraint firstItem="gyS-4y-gl3" firstAttribute="top" secondItem="Ii1-6s-Mqk" secondAttribute="bottom" constant="16" id="qLp-Xo-wBU"/>
                 <constraint firstItem="FRp-F6-Gcg" firstAttribute="top" secondItem="cDY-4A-Oxc" secondAttribute="bottom" constant="12" id="rLQ-JG-ipQ"/>
                 <constraint firstItem="GBA-4r-8Mk" firstAttribute="centerX" secondItem="FRp-F6-Gcg" secondAttribute="centerX" id="smJ-aM-sxf"/>
-                <constraint firstItem="NzH-l0-XwU" firstAttribute="trailing" secondItem="mrR-bR-kzx" secondAttribute="trailing" constant="-8" id="t1E-Ov-2uR"/>
                 <constraint firstItem="V0p-Dr-gj0" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="uzQ-qr-Y0e"/>
                 <constraint firstItem="0dG-DZ-3Ty" firstAttribute="centerX" secondItem="mrR-bR-kzx" secondAttribute="centerX" id="wzl-1T-3Fk"/>
             </constraints>
             <connections>
                 <outlet property="bottomConstraint" destination="CQu-Qx-pas" id="WK8-P3-dWe"/>
                 <outlet property="closeButton" destination="NzH-l0-XwU" id="SBD-1S-r38"/>
+                <outlet property="closeButtonTop" destination="PNn-Q1-Flv" id="EOc-oK-kc0"/>
                 <outlet property="enjoyLabel" destination="FRp-F6-Gcg" id="0W9-qv-r2o"/>
                 <outlet property="eulaButton" destination="TVU-oo-P1g" id="kEe-bG-ezP"/>
                 <outlet property="eulaStackView" destination="sFr-H3-V0j" id="nUv-fS-pde"/>
@@ -273,6 +274,7 @@
                 <outlet property="thenLabel2" destination="Ii1-6s-Mqk" id="8C7-fY-lUt"/>
                 <outlet property="topConstraint" destination="ofy-Bv-Nih" id="Mdi-vc-xl0"/>
                 <outlet property="tryFreeButton" destination="gyS-4y-gl3" id="Acg-PR-fbX"/>
+                <outlet property="videoHeightConstraint" destination="td3-gQ-qbC" id="Pj6-OH-SXO"/>
                 <outlet property="videoView" destination="B2a-tK-G0H" id="z6P-7i-jG1"/>
             </connections>
             <point key="canvasLocation" x="142" y="154"/>
