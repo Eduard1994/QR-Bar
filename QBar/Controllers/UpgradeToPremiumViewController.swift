@@ -15,20 +15,21 @@ protocol UpgradeFromRecentsDelegate: class {
 class UpgradeToPremiumViewController: UIViewController {
     
     // MARK: - IBOutlets
-    @IBOutlet weak var upgradeLabel: UILabel!
-    @IBOutlet weak var enjoyLabel: UILabel!
+//    @IBOutlet weak var upgradeLabel: UILabel!
+//    @IBOutlet weak var enjoyLabel: UILabel!
     @IBOutlet weak var startFreeLabel: UILabel!
     @IBOutlet weak var thenLabel: UILabel!
-    @IBOutlet weak var proceedWithBasicButton: UIButton!
+//    @IBOutlet weak var proceedWithBasicButton: UIButton!
     @IBOutlet weak var tryFreeButton: UIButton!
-    @IBOutlet weak var startMonthlyView: UIView!
-    @IBOutlet weak var startYearlyButton: UIButton!
-    @IBOutlet weak var priceAYearButton: UIButton!
+//    @IBOutlet weak var startMonthlyView: UIView!
+//    @IBOutlet weak var startYearlyButton: UIButton!
+//    @IBOutlet weak var priceAYearButton: UIButton!
     @IBOutlet weak var trialLabel: UILabel!
     @IBOutlet weak var privacyButton: UIButton!
     @IBOutlet weak var eulaButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
     
+    @IBOutlet weak var videoView: VideoView!
     
     // MARK: - Properties
     let service = Service()
@@ -53,15 +54,26 @@ class UpgradeToPremiumViewController: UIViewController {
         configureView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        /// Configuring Video Preview
+        videoView.play()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        /// Configuring Video Preview
+        videoView.stop()
+    }
     
     // MARK: - Private Functions
     private func configureView() {
-        proceedWithBasicButton.addLine(position: .LINE_POSITION_BOTTOM, color: .mainGrayAverage, width: 0.5)
+//        proceedWithBasicButton.addLine(position: .LINE_POSITION_BOTTOM, color: .mainGrayAverage, width: 0.5)
         tryFreeButton.cornerRadius(to: 20)
         privacyButton.addLine(position: .LINE_POSITION_BOTTOM, color: .mainGrayAverage, width: 0.5)
         eulaButton.addLine(position: .LINE_POSITION_BOTTOM, color: .mainGrayAverage, width: 0.5)
-        startMonthlyView.cornerRadius(to: 20)
-        startMonthlyView.addBorder(width: 2.0, color: .mainBlack)
+//        startMonthlyView.cornerRadius(to: 20)
+//        startMonthlyView.addBorder(width: 2.0, color: .mainBlack)
         
         service.getOnboardingTitles(for: PremiumTab.Onboarding.rawValue) { (onboarding, error) in
             if let error = error {
@@ -76,6 +88,9 @@ class UpgradeToPremiumViewController: UIViewController {
                 }
             }
         }
+        /// Configuring Video Preview
+        videoView.configure(resource: "video2")
+        videoView.isLoop = true
     }
     
     private func configureSubscribeTitles(for onboarding: OnboardingTitle, subscriptions: Subscriptions) {
@@ -84,28 +99,28 @@ class UpgradeToPremiumViewController: UIViewController {
                 if title.contains("Monthly") {
                     self.thenLabel.text = "\(onboarding.fourthTitle) \(price) a month"
                 } else if title.contains("Yearly") {
-                    self.priceAYearButton.setTitle("\(price) \(onboarding.startYearlySecondTitle)", for: UIControl.State())
+//                    self.priceAYearButton.setTitle("\(price) \(onboarding.startYearlySecondTitle)", for: UIControl.State())
                 }
             }
         } else {
             self.thenLabel.text = "\(onboarding.fourthTitle) $7.99 a month"
-            self.priceAYearButton.setTitle("$32.99 \(onboarding.startYearlySecondTitle)", for: UIControl.State())
+//            self.priceAYearButton.setTitle("$32.99 \(onboarding.startYearlySecondTitle)", for: UIControl.State())
         }
         
         self.closeButton.isHidden = !onboarding.closeButton
         self.closeButton.isEnabled = onboarding.closeButton
-        self.proceedWithBasicButton.isHidden = onboarding.proceedIsHidden
-        self.proceedWithBasicButton.isEnabled = !onboarding.proceedIsHidden
-        self.upgradeLabel.text = onboarding.firstTitle
-        self.enjoyLabel.text = onboarding.secondTitle
+//        self.proceedWithBasicButton.isHidden = onboarding.proceedIsHidden
+//        self.proceedWithBasicButton.isEnabled = !onboarding.proceedIsHidden
+//        self.upgradeLabel.text = onboarding.firstTitle
+//        self.enjoyLabel.text = onboarding.secondTitle
         self.startFreeLabel.text = onboarding.thirdTitle
-        self.proceedWithBasicButton.setTitle(onboarding.basicTitle, for: UIControl.State())
+//        self.proceedWithBasicButton.setTitle(onboarding.basicTitle, for: UIControl.State())
         self.tryFreeButton.setTitle(onboarding.tryFreeTitle, for: UIControl.State())
-        self.startYearlyButton.setTitle(onboarding.startYearlyFirstTitle, for: UIControl.State())
+//        self.startYearlyButton.setTitle(onboarding.startYearlyFirstTitle, for: UIControl.State())
         self.trialLabel.text = onboarding.privacyEulaTitle
         
         self.thenLabel.isHidden = onboarding.fourthTitleIsHidden
-        self.priceAYearButton.isHidden = onboarding.startYearlySecondTitleIsHIdden
+//        self.priceAYearButton.isHidden = onboarding.startYearlySecondTitleIsHIdden
     }
     
     /// Purchasing product
@@ -156,12 +171,12 @@ class UpgradeToPremiumViewController: UIViewController {
         }
     }
     
-    // MARK: - IBActions
-    @IBAction func proceedWithBasicTapped(_ sender: Any) {
-//        NotificationCenter.default.post(name: dismissNotification, object: nil)
-        dismiss(animated: true, completion: nil)
-        self.delegate?.dismissFromUpgrade()
-    }
+//    // MARK: - IBActions
+//    @IBAction func proceedWithBasicTapped(_ sender: Any) {
+////        NotificationCenter.default.post(name: dismissNotification, object: nil)
+//        dismiss(animated: true, completion: nil)
+//        self.delegate?.dismissFromUpgrade()
+//    }
     
     @IBAction func tryFreeTapped(_ sender: Any) {
 //        purchase(index: 1)
@@ -178,19 +193,19 @@ class UpgradeToPremiumViewController: UIViewController {
         }
     }
     
-    @IBAction func startYearlyTapped(_ sender: Any) {
-        print("Start Yearly Tapped")
-        QRAnalytics.shared.tappedToSubscribeButton(userID: User.currentUser?.uid ?? "", button: "Start Yearly Button")
-        if service.isConnectedToInternet {
-            for productID in productIDs {
-                if productID.contains("year") {
-                    purchaseItem(productID: productID)
-                }
-            }
-        } else {
-            ErrorHandling.showError(message: "Check Internet Connection and try again.", controller: self)
-        }
-    }
+//    @IBAction func startYearlyTapped(_ sender: Any) {
+//        print("Start Yearly Tapped")
+//        QRAnalytics.shared.tappedToSubscribeButton(userID: User.currentUser?.uid ?? "", button: "Start Yearly Button")
+//        if service.isConnectedToInternet {
+//            for productID in productIDs {
+//                if productID.contains("year") {
+//                    purchaseItem(productID: productID)
+//                }
+//            }
+//        } else {
+//            ErrorHandling.showError(message: "Check Internet Connection and try again.", controller: self)
+//        }
+//    }
     
     @IBAction func startMonthlyTapped(_ sender: Any) {
 //        purchase(index: 0)

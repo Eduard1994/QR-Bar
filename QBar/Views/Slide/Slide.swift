@@ -20,10 +20,14 @@ class Slide: UIView {
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint! // 251 for custom
     @IBOutlet weak var topConstraint: NSLayoutConstraint! // 92 for custom
     
+    @IBOutlet weak var videoView: VideoView!
+    
     @IBOutlet weak var premiumLabel: UILabel!
     @IBOutlet weak var enjoyLabel: UILabel!
     @IBOutlet weak var startFreeLabel: UILabel!
+    @IBOutlet weak var startFreeLabel2: UILabel!
     @IBOutlet weak var thenLabel: UILabel!
+    @IBOutlet weak var thenLabel2: UILabel!
     @IBOutlet weak var proceedWithBasicButton: UIButton!
     
     @IBOutlet weak var tryFreeButton: UIButton!
@@ -87,8 +91,11 @@ class Slide: UIView {
         }
 //        slide1.closeButton.isHidden = true
 //        slide1.closeButton.isEnabled = false
+        slide1.videoView.isHidden = true
         slide1.startFreeLabel.isHidden = true
+        slide1.startFreeLabel2.isHidden = true
         slide1.thenLabel.isHidden = true
+        slide1.thenLabel2.isHidden = true
         slide1.proceedWithBasicButton.isHidden = true
         slide1.proceedWithBasicButton.isEnabled = false
         slide1.tryFreeButton.isHidden = true
@@ -99,6 +106,7 @@ class Slide: UIView {
         slide1.eulaStackView.isHidden = true
         slide1.privacyPolicyButton.isEnabled = false
         slide1.eulaButton.isEnabled = false
+        slide1.imageView.isHidden = false
         
         let slide2: Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
         slide2.imageView.image = UIImage(named: "barCodeOnboarding")
@@ -130,8 +138,11 @@ class Slide: UIView {
         
 //        slide2.closeButton.isHidden = true
 //        slide2.closeButton.isEnabled = false
+        slide2.videoView.isHidden = true
         slide2.startFreeLabel.isHidden = true
+        slide2.startFreeLabel2.isHidden = true
         slide2.thenLabel.isHidden = true
+        slide2.thenLabel2.isHidden = true
         slide2.proceedWithBasicButton.isHidden = true
         slide2.proceedWithBasicButton.isEnabled = false
         slide2.tryFreeButton.isHidden = true
@@ -142,6 +153,7 @@ class Slide: UIView {
         slide2.eulaStackView.isHidden = true
         slide2.privacyPolicyButton.isEnabled = false
         slide2.eulaButton.isEnabled = false
+        slide2.imageView.isHidden = false
         
         let slide3: Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
         slide3.imageView.image = UIImage(named: "upgradeBackground")
@@ -170,24 +182,30 @@ class Slide: UIView {
         }
         
         slide3.topConstraint.constant = 48
-        slide3.premiumLabel.isHidden = false
-        slide3.enjoyLabel.isHidden = false
+        slide3.premiumLabel.isHidden = true
+        slide3.enjoyLabel.isHidden = true
+        slide3.imageView.isHidden = true
         
 //        slide3.closeButton.isHidden = false
 //        slide3.closeButton.isEnabled = true
-        slide3.startFreeLabel.isHidden = false
-        slide3.thenLabel.isHidden = false
-        slide3.proceedWithBasicButton.isHidden = false
-        slide3.proceedWithBasicButton.isEnabled = true
+        slide3.videoView.isHidden = false
+        slide3.startFreeLabel.isHidden = true
+        slide3.thenLabel.isHidden = true
+        slide3.startFreeLabel2.isHidden = false
+        slide3.thenLabel2.isHidden = false
+        slide3.proceedWithBasicButton.isHidden = true
+        slide3.proceedWithBasicButton.isEnabled = false
         slide3.proceedWithBasicButton.addLine(position: .LINE_POSITION_BOTTOM, color: .mainGrayAverage, width: 0.5)
         slide3.tryFreeButton.isHidden = false
         slide3.tryFreeButton.isEnabled = true
         slide3.tryFreeButton.cornerRadius(to: 20)
         slide3.startMonthlyView.cornerRadius(to: 20)
         slide3.startMonthlyView.addBorder(width: 2.0, color: .mainBlack)
-        slide3.startYearlyButton.isEnabled = true
-        slide3.startYearlySecondButton.isEnabled = true
-        slide3.startMonthlyView.isHidden = false
+        slide3.startYearlyButton.isEnabled = false
+        slide3.startYearlyButton.isHidden = true
+        slide3.startYearlySecondButton.isEnabled = false
+        slide3.startYearlySecondButton.isHidden = true
+        slide3.startMonthlyView.isHidden = true
         slide3.eulaStackView.isHidden = false
         slide3.privacyPolicyButton.isEnabled = true
         slide3.privacyPolicyButton.addLine(position: .LINE_POSITION_BOTTOM, color: .mainGrayAverage, width: 0.5)

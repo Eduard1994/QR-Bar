@@ -53,6 +53,11 @@ class OnboardingViewController: UIViewController {
         print("viewWillDisappear")
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        slides.last?.videoView.stop()
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self, name: dismissNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: subTypeNotificationIndex, object: nil)
@@ -111,12 +116,14 @@ class OnboardingViewController: UIViewController {
             snakePageControl.isHidden = true
             nextButton.isHidden = true
             nextButton.isEnabled = false
+            slides.last?.videoView.play()
         } else {
             nextButton.isHidden = false
             nextButton.isEnabled = true
             snakePageControl.isHidden = false
             nextButton.setImage(UIImage(named: "arrowRight"), for: .normal)
             nextButton.setTitle(nil, for: .normal)
+            slides.last?.videoView.stop()
         }
     }
     
@@ -175,6 +182,10 @@ class OnboardingViewController: UIViewController {
                 }
             }
         }
+        
+        /// Configuring Video Preview
+        slides.last?.videoView.configure(resource: "video2")
+        slides.last?.videoView.isLoop = true
     }
     
     private func configureSlideLabels(slide: Slide, onboarding: OnboardingTitle, subscriptions: Subscriptions) {
@@ -203,12 +214,16 @@ class OnboardingViewController: UIViewController {
         slide.startYearlyButton.setTitle(onboarding.startYearlyFirstTitle, for: UIControl.State())
         slide.privacyEulaLabel.text = onboarding.privacyEulaTitle
         
-        slides.last?.thenLabel.isHidden = onboarding.fourthTitleIsHidden
-        slides.last?.startYearlySecondButton.isHidden = onboarding.startYearlySecondTitleIsHIdden
+//        slides.last?.thenLabel.isHidden = onboarding.fourthTitleIsHidden
+        slides.last?.thenLabel.isHidden = true
+//        slides.last?.startYearlySecondButton.isHidden = onboarding.startYearlySecondTitleIsHIdden
+        slides.last?.startYearlySecondButton.isHidden = true
         slides[0].closeButton.isHidden = true
         slides[0].closeButton.isEnabled = false
         slides[1].closeButton.isHidden = true
         slides[1].closeButton.isEnabled = false
+        slides[2].proceedWithBasicButton.isHidden = true
+        slides[2].proceedWithBasicButton.isEnabled = false
     }
     
     /// Purchasing product
